@@ -1,9 +1,5 @@
 # MATLAB HW 2
 
-Tom Zhang  
-MATH18_FA22_B05  
-PID: A17356676
-
 <br/><br/>
 
 ## Exercise 2.1
