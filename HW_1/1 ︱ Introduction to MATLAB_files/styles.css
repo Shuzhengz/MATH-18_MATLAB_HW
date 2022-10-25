@@ -1,0 +1,77 @@
+		div.content	{ font-family: "-apple-system", ".SFNSDisplay-Regular", "Helvetica Neue", "Segoe UI", "Ubuntu", sans-serif; font-weight: 400; font-size: 13pt; color: black ; max-width: 900px; margin: 10px 15px; counter-reset: exercise 0 example 0 note 0 ; }
+		a	{ text-decoration: none; font-weight: 500 }
+			a:link		{ color: #1f5cc2 }
+			a:visited	{ color: #391e90 }
+			a:hover		{ text-decoration: underline }
+			a:active	{ color: #9d0e62 }
+		h1		{ counter-increment: section; counter-reset: subsection; font-size: 3.3em; font-weight: 100; margin: 0.2em 0em 0.2em 0em; text-align: center}
+		h2		{ counter-increment: subsection; font-size: 2.0em; font-weight: 100; margin: 0.8em 0em 0.4em 0em }
+		h3		{ font-size: 1.3em; font-weight: 200; margin: 0.8em 0em 0.4em 0em; text-align: center }
+			h1:before	{
+				content: counter(section) " ︱ ";}
+			h2:before	{
+				content: counter(section) "." counter(subsection) " ︱ ";}
+		b		{ font-weight: 600 }
+		strong	{ font-weight: 600 }
+		var		{ font-weight: 300 }
+			var b	{ font-style: normal }
+		samp	{ font-family: "Andale Mono", consolas, "Ubuntu Monospace", monospace }
+		pre		{ font-family: "Andale Mono", consolas, "Ubuntu Monospace", monospace }
+		code	{ color: #0a7acc; font-family: "Andale Mono", consolas, "Ubuntu Monospace", monospace }
+		i#mod	{ font-weight: 100; font-size: 0.8em }
+		table	{ border-collapse: collapse; border: 0px; width: 90%; margin-left: 5%; margin-right: 5%; }
+			.data	{ width: 68%; margin-left: 10%; text-align: right; white-space:nowrap; }
+			.data tr:nth-child(even)	{ background-color: #efe8f9 }
+			.data td	{ border: 1px dotted #4a00b8; width: 12%; }
+			.data th.leftcol	{padding-right: 8px; background-color: #ffffff; width: 8%}
+			.twocol	{ width: 60%; margin-left: 15%; white-space:nowrap; }
+			.twocol tr:nth-child(even)	{ background-color: #efe8f9 }
+			.twocol th.leftcol	{ border-right: 1px solid #4a00b8; padding-right: 8px; background-color: #ffffff; text-align: right }
+			#responses	{ border: 2px solid #aaaaaa; margin-left: 8%; margin-right: 8%; width: 84%}
+		td		{ padding: 4px }
+			#responses td { border: 1px solid #cccccc }
+			#gradescope { width: 65%; margin-left: auto; margin-right: auto }
+			#gradescope tr:nth-child(even)	{ background-color: #efe8f9 }
+			#gradescope th	{ background-color: #ffffff; }
+			#gradescope th.leftcol	{ border-right: 1px solid #4a00b8; padding-right: 8px; background-color: #ffffff; }
+		th		{ padding: 4px; font-weight: 500 }
+		li			{ margin-bottom: 0.5em }
+			li p	{ margin: 0.6em 0em 0.6em 0em }
+		span.e-g		{ font-weight: 600; color: #3e873e }
+			span.e-g:before	{ counter-increment: example 1;
+				content: "Example " counter(section) "." counter(example) ;}
+		span.e-g_style	{ font-weight: 600; color: #3e873e }
+		span.e-x		{ font-weight: 600; color: #4a00b8 }
+			span.e-x:before	{ counter-increment: exercise 1;
+				content: "Exercise " counter(section) "." counter(exercise) ;}
+		span.e-x_style	{ font-weight: 600; color: #4a00b8 }
+		span.sol		{ font-weight: 600; color: #4040bf }
+			span.sol:before	{ 
+				content: "Solution"}
+		span.e-n		{ font-weight: 600; color: #e65c00 }
+			span.e-n:before	{ counter-increment: note 1;
+				content: "Note " counter(section) "." counter(note)":" ;}
+		span.e-n_style	{ font-weight: 600; color: #e65c00 }
+		span.pts		{ font-weight: 400; color: #cc0066; font-family:"-apple-system", ".SFNSDisplay-Regular", "Helvetica Neue", "Segoe UI", "Ubuntu", sans-serif; }
+			span.pts:before	{
+				content: "["; }
+			span.pts:after	{
+				content: "]"; }
+		span.pts_style		{ font-weight: 400; color: #cc0066; font-family:"-apple-system", ".SFNSDisplay-Regular", "Helvetica Neue", "Segoe UI", "Ubuntu", sans-serif; }
+		.center		{ margin-left: auto; margin-right:auto; display:block; width: 85%; }
+		div.inset		{ margin-left: 2%; padding-left: 2%; border-left:5px double #dddddd }
+		div.example		{ border:1px solid #3e873e; padding: 10px 20px; margin-top: 12px }
+		div.exercise	{ border:2px solid #4a00b8; padding: 10px 20px; margin-top: 12px; font-weight: 400 }
+		div.solution	{ border:1px solid #4040bf; padding: 10px 20px; margin-top: 12px; margin-left:20px; margin-right: 20px; }
+		.align-right { float:right; margin: 3px }
+		.menu {		float:left;
+    			  	width:8%;
+					height:80%;
+					font-size: 0.7em;
+   				}
+    	.main	{	float:right;
+					width:88%;
+					height:80%;
+					border-left: 1px solid #cccccc;
+					padding-left: 1em
+				}

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+	<title>2 ︱ Systems of Linear Equations</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Math 18 MATLAB Assignment 2">
+	<link rel="stylesheet" href="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/styles.css">
+</head>
+
+<body style="counter-reset:section 1">
+<div class="content">
+
+<div class="menu">
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html">Main</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html">FAQ</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html#quiztimes">Quiz Times</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/tutorhours.html">Tutor
+Hours</a>
+</p>
+
+</div>
+
+<div class="main">
+
+<h1>Systems of Linear Equations</h1>
+
+<hr>
+
+<p>
+You have already encountered linear equations many times in your career 
+as a student. Most likely, the very first equation you had to solve was 
+linear. This kind of equation is extremely simple, yet systems of 
+multiple linear equations are of immense important in a huge variety of 
+mathematical, scientific, and sociological fields. Math 18 is probably 
+your first systematic study of linear equations, and in this lab we're 
+going to see how we can use MATLAB to solve them. We will also learn 
+about a very useful application of this kind of mathematics to economics
+ and computer science.
+</p>
+
+<h2>Solving Linear Systems</h2>
+
+<p>
+By now we have seen how a system of linear equations can be transformed 
+into a matrix equation, making the system easier to solve.
+</p>
+
+<div class="example">
+<span class="e-g"></span>
+<p>
+The system
+</p>
+
+<p class="center">
+	<var>2x<sub>1</sub> - 1x<sub>2</sub> + 1x<sub>3</sub> = 8</var><br>
+	<var>1x<sub>1</sub> + 2x<sub>2</sub> + 3x<sub>3</sub> = 9</var><br>
+	<var>3x<sub>1</sub> + 0x<sub>2</sub> - x<sub>3</sub> = 3</var>
+</p>
+
+<p>
+can be written in the following way:
+</p>
+
+<div class="center">
+<img style="border: 0px solid ; width: 159px; height: 75px;" alt="" src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/system1.gif">
+</div>
+
+<p>Now, by augmenting the matrix with the vector on the right and using 
+row operations, this equation can easily be solved by hand. However, if 
+our system did not have nice integer entries, solving it by hand using 
+row reduction could become very difficult. MATLAB provides us with an 
+easier way to get an answer.</p>
+
+<p>A system of this type has the form <b>Ax</b> = <b>b</b>, so we can enter these numbers into MATLAB using the following commands:</p>
+
+<pre><samp>&gt;&gt; </samp><code>A = [2 -1 1; 1 2 3; 3 0 -1]</code>
+<samp>&gt;&gt; </samp><code>b = [8; 9; 3]</code></pre>
+
+<p>Notice that for the column vector <var><b>b</b></var>, we include semicolons after each entry to ensure that the entries are on different rows. If instead we had typed</p>
+
+<samp>&gt;&gt; </samp><code>b = [8 9 3]</code>
+
+<p>we would have gotten a row vector, which is not the same thing. Now that we've defined <code>A</code> and <code>b</code>, the command</p>
+
+<samp>&gt;&gt; </samp><code>x = A\b</code>
+
+<p>will find the solution to our equation <var><b>Ax</b> = <b>b</b></var> if it exists. In this case, MATLAB tells us</p>
+
+<pre><samp>x =
+   2.0000
+  -1.0000
+   3.0000</samp></pre>
+</div>
+
+<p><span class="e-n"></span> Please take care in entering the command <code>A\b</code>. It has a backslash (<code>\</code>), <b>not</b> a forward slash (<code>/</code>).</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/console.png" class="align-right" width="24" height="24">
+<img alt="Do work by hand." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/pencil.png" class="align-right" width="24" height="24">
+
+<p>Consider the system of equations</p>
+		
+		<p class=" center ">
+			<var>2x<sub>1</sub> + 1x<sub>2</sub> + 6x<sub>3</sub> = 1</var><br>
+			<var>1x<sub>1</sub> + 0x<sub>2</sub> + 3x<sub>3</sub> = 2</var><br>
+			<var>-3x<sub>1</sub> + 2x<sub>2</sub> -7x<sub>3</sub> = 3</var>
+		</p>
+		
+<p>Convert this system of equations into a matrix equation of the form <var><b>Cx</b> = <b>d</b></var>. Solve it by hand, and record your solution in your document.</p>
+		
+<ol type="a">
+	<li>
+		<p>Enter the matrix <b>C</b> and the column vector <b>d</b> into MATLAB, and use the command</p>
+		
+		<samp>&gt;&gt; </samp><code>x = C\d</code>
+		
+		<p>to check your solution.</p>
+	</li>
+	<li>
+		<p>We would expect to get the column vector <b>d</b> in MATLAB if we ran the command <code>C*x</code>, right? In other words, <code>C*x-d</code> should be zero. Enter this expression into MATLAB:</p>
+		
+	<samp>&gt;&gt; </samp><code>C*x-d</code>
+		
+		<p>Include the input and output.</p>
+	</li>
+</ol>
+</div>
+
+<!-- <p><span class="e-n"></span> The discrepancy in the last part of the above exercise is simply due to rounding error. You'll notice that the error is a vector multiplied by a very small number, one on the order of 10<sup>-15</sup>. But why is there any error at all? After all, solving by row reduction gave very nice numbers, right? The answer is in the way MATLAB stores numbers. In this calculation MATLAB represents numbers in "floating point form," which means it represents them in scientific notation to an accuracy of about 10<sup>-14</sup>. Thus when you see 10<sup>-14</sup> in calculations during this course, it is usually equivalent to zero.</p> -->
+
+<p>There are drawbacks to using the command <code>x = C\d</code>, unfortunately. Let's explore them now.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/text.png" class="align-right" width="24" height="24">
+<img alt="Do work by hand." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/pencil.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/console.png" class="align-right" width="24" height="24">
+
+<p>Consider the system of equations</p>
+
+<p class=" center ">
+	<var>-10x<sub>1</sub> + 5x<sub>2</sub> = 0</var><br>
+	<var>6x<sub>1</sub> - 3x<sub>2</sub> = 0</var>
+</p>
+		
+<p>As you did in the previous exercise, enter the corresponding matrix <var><b>C</b></var> and column vector <var><b>d</b></var> into MATLAB. Then type in</p>
+
+<samp>&gt;&gt; </samp><code>x = C\d</code>
+
+<p>Note the strange output. Include it in your write-up. Now go ahead 
+and solve this system by hand. How many free variables do you have in 
+your solution? Based on your answer, can you explain why you got the 
+error message when trying to use the command <code>x = C\d</code>?</p>
+</div>
+
+<p>
+To deal with the case of inconsistent systems or systems with infinitely
+ many solutions, it may sometimes be better to simply use MATLAB to 
+row-reduce your matrix and then read off the solutions yourself. 
+Luckily, MATLAB has a command that performs Gaussian elimination for 
+you.
+</p>
+
+<div class="example">
+<span class="e-g"></span>
+<p>
+Consider the following homogeneous system of equations:
+</p>
+
+<p class="center">
+	<var>2x<sub>1</sub> + 0x<sub>2</sub>-3x<sub>3</sub> = 0</var><br>
+	<var>4x<sub>1</sub> + x<sub>2</sub> + 2x<sub>3</sub> = 0</var><br>
+	<var>2x<sub>1</sub> + x<sub>2</sub> + 5x<sub>3</sub> = 0</var>
+</p>
+
+<p>
+Enter the corresponding matrix <var><b>C</b></var> and column vector <var><b>d</b></var> into MATLAB. Now we want to perform row reduction on the augmented matrix [<b>C</b> | <b>d</b>]. The command that performs row reduction in MATLAB is <code>rref</code> (the name stands for "reduced row echelon form"). Type in
+</p>
+
+<pre><samp>&gt;&gt; </samp><code>rref([C d])</code>
+
+<samp>ans =
+   <!-- 1.0000        0  -3.5000        0
+        0   1.0000  12.0000        0
+        0        0        0        0 -->
+     1.0000         0   -1.5000         0
+         0    1.0000    8.0000         0
+         0         0         0         0</samp></pre>
+
+<p>
+Recall from class that we can use this row-reduced form to see that <var>x<sub>1</sub> = 1.5x<sub>3</sub></var> and that <var>x<sub>2</sub> = -8x<sub>3</sub></var>. Here, <var>x<sub>3</sub></var>
+ is the free variable, and we can choose whatever value we want for it; 
+once we do that, the other two variables are fixed. For instance, if we 
+pick <var>x<sub>3</sub> = 2</var>, then <var>x<sub>1</sub> = 3</var> and <var>x<sub>2</sub> = -16</var>. There are infinitely many solutions because there are infinitely many choices for the value of <var>x<sub>3</sub></var>, but they all follow this pattern.
+</p>
+</div>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/text.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/console.png" class="align-right" width="24" height="24">
+
+<p>Consider the homogeneous system of equations</p>
+
+<p class="center">
+	<var>x<sub>1</sub> - 3x<sub>2</sub> + 2x<sub>3</sub> = 0</var><br>
+	<var>-2x<sub>1</sub> + 6x<sub>2</sub> - 4x<sub>3</sub> = 0</var><br>
+	<var>4x<sub>1</sub> - 12x<sub>2</sub> + 8x<sub>3</sub> = 0</var>
+</p>
+
+		
+<p>
+By using the <code>rref</code> command, write down the general solution to this system of equations. How many free variables are required?
+</p>
+</div>
+
+<p>
+Now that we've seen MATLAB's basic tools for solving linear systems, let's turn to some applications.
+</p>
+
+<h2>Economics: Leontief Models</h2>
+
+<p>
+Wassily Leontief (1906-1999) was a Russian-born American economist who, 
+aside from developing highly sophisticated economic theories, enjoyed 
+trout fishing, ballet, and fine wines. He won the 1971 Nobel Memorial 
+Prize in Economics for his work in creating mathematical models to 
+describe various economic phenomena. In the remainder of this lab we 
+will look at a very simple special case of his work called a <b>closed exchange model</b>. There are two basic assumptions:
+</p>
+
+<ul>
+	<li>Everyone exclusively buys from and sells to the central pool (i.e., there is no outside supply or demand).</li>
+	<li>Everything produced is consumed.</li>
+</ul>
+
+<p>
+With these assumptions and some data about how the goods are consumed, 
+we can compute exactly what price each good should have for everyone in 
+the community to survive.
+</p>
+
+<p>
+To see how this works, let's suppose there's a small country town with 
+only five residents: a farmer, a tailor, a carpenter, a coal miner, and 
+Slacker Bob. The farmer produces food; the tailor, clothes; the 
+carpenter, housing; the coal miner, energy; and Slacker Bob makes 
+moonshine, half of which he drinks himself. The following table lists 
+what fraction of each good our five residents consume:
+</p>
+
+<table class="data">
+	<tbody><tr>
+		<th class="leftcol"></th>	<th>Food</th>	<th>Clothes</th>	<th>Housing</th>	<th>Energy</th>	<th>Alcohol</th>
+	</tr>
+	<tr>
+		<th class="leftcol">Farmer</th>	<td>0.25</td>	<td>0.15</td>	<td>0.25</td>	<td>0.18</td>	<td>0.20</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Tailor</th>	<td>0.17</td>	<td>0.28</td>	<td>0.18</td>	<td>0.17</td>	<td>0.10</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Carpenter</th>	<td>0.22</td>	<td>0.19</td>	<td>0.22</td>	<td>0.22</td>	<td>0.10</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Miner</th>	<td>0.20</td>	<td>0.15</td>	<td>0.20</td>	<td>0.28</td>	<td>0.15</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Slacker Bob</th>	<td>0.16</td>	<td>0.23</td>	<td>0.15</td>	<td>0.15</td>	<td>0.45</td>
+	</tr>
+</tbody></table>
+
+<p>So for example, the carpenter consumes 22% of all food, 19% of all 
+clothes, 22% of all housing, 22% of all energy, and 10% of all the 
+moonshine.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/text.png" class="align-right" width="24" height="24">
+
+<p>The columns in this table all add up to 1. Explain why.</p>
+</div>
+
+<p>Now, let <var>f</var>, <var>t</var>, <var>c</var>, <var>m</var>, and <var>b</var>
+ denote the incomes of the farmer, tailor, carpenter, miner, and Bob, 
+respectively. Note that each of these quantities represents not only the
+ gross incomes of each of our citizens but also the total cost of the 
+goods they sell. So for example, <var>f</var> is the farmer's income and
+ also is the cost of all the food. If the farmer produces $100 worth of 
+food, then his income will also be $100, since all of this food gets 
+purchased and all the revenue goes to the farmer.</p>
+
+<p>We want to price the goods so that everyone earns enough money to pay
+ for all the goods they consume. To do that, we need to satisfy the 
+following five equations:</p>
+
+<p class="center">
+	<var>0.25f + 0.15t + 0.25c + 0.18m + 0.20b = f</var><br>
+	<var>0.17f + 0.28t + 0.18c + 0.17m + 0.10b = t</var><br>
+	<var>0.22f + 0.19t + 0.22c + 0.22m + 0.10b = c</var><br>
+	<var>0.20f + 0.15t + 0.20c + 0.28m + 0.15b = m</var><br>
+	<var>0.16f + 0.23t + 0.15c + 0.15m + 0.45b = b</var>
+</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/text.png" class="align-right" width="24" height="24">
+
+<p>Explain where this system of equations came from and what it means. 
+(What do the left-hand side and the right-hand side of each equation 
+represent?)</p>
+</div>
+
+<p>
+Let's denote the column vector <var>(f, t, c, m, b)<sup>T</sup></var> by <var><b>p</b></var>. Let <var><b>C</b></var> be the coefficient matrix of the above system. We can now rewrite that system as <var><b>Cp</b> = <b>p</b></var>, or equivalently,
+</p>
+
+<p class="center">
+	<b>Cp</b> - <b>p</b> = <b>Cp</b> - <b>Ip</b> = (<b>C</b> - <b>I</b>)<b>p</b> = <b>0</b>
+</p>
+
+<p>where <var><b>I</b></var> is the 5×5 identity matrix.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/text.png" class="align-right" width="24" height="24">
+<img alt="Do work by hand." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/pencil.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/console.png" class="align-right" width="24" height="24">
+ 
+<p>Enter the matrices <var><b>C</b></var> and <var><b>I</b></var> into MATLAB.</p>
+		
+		<pre><samp>&gt;&gt; </samp><code>
+C = [0.25 0.15 0.25 0.18 0.20;
+0.17 0.28 0.18 0.17 0.10;
+0.22 0.19 0.22 0.22 0.10;
+0.20 0.15 0.20 0.28 0.15;
+0.16 0.23 0.15 0.15 0.45]</code>
+
+<samp>&gt;&gt; </samp><code>I = eye(5)</code></pre>
+		
+		<p>The command <code>eye(n)</code> used here creates an n×n matrix with ones on the diagonal and zeros elsewhere.</p>
+
+<ol type="a">
+	<li>
+		<p>Use MATLAB to row-reduce the augmented matrix [<b>C</b> - <b>I</b> | <b>0</b>], and write down the general solution to (<b>C</b> - <b>I</b>)<b>p</b> = <b>0</b>.</p>
+	</li>
+	<li>
+		<p>What are highest- and lowest-priced commodities in this model 
+community? List the inhabitants in order of income, from lowest to 
+highest. If our friend Bob sells $40,000 in moonshine per year, what are
+ the gross incomes for the rest of the inhabitants?</p>
+	</li>
+</ol>
+</div>
+
+<h2>Computer Science: Web Search</h2>
+
+<p>Here's a basic problem: in a particular group of people, who is the most popular?</p>
+
+<p>One possible approach for answering this question is to ask everyone 
+in the group to list their friends in that group. (This is a dangerous 
+experiment—do not try it in your own social groups!) Suppose we're 
+interested in a group of four people: June, Carlos, Meichen, and Felix. 
+We will nickname them J, C, M, and F, respectively. We ask them to 
+identify their friends, and they respond as follows:</p>
+
+<table class="twocol">
+	<tbody><tr>
+		<th class="leftcol">June</th>	<td>C, M</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Carlos</th>	<td>J, M, F</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Meichen</th>	<td>J, C, F</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Felix</th>	<td>J, M</td>
+	</tr>
+</tbody></table>
+
+<p>We could represent this data in a 4×4 table of zeros and ones, where a
+ 1 says that the person listed in the top row considers the person named
+ on the left to be a friend:</p>
+
+<table class="data" style="width: 50%; margin-left: 20% ">
+	<tbody><tr>
+		<th class="leftcol"></th>	<th>June</th>	<th>Carlos</th>	<th>Meichen</th>	<th>Felix</th>
+	</tr>
+	<tr>
+		<th class="leftcol">J</th>	<td>0</td>	<td>1</td>	<td>1</td>	<td>1</td>
+	</tr>
+	<tr>
+		<th class="leftcol">C</th>	<td>1</td>	<td>0</td>	<td>1</td>	<td>0</td>
+	</tr>
+	<tr>
+		<th class="leftcol">M</th>	<td>1</td>	<td>1</td>	<td>0</td>	<td>1</td>
+	</tr>
+	<tr>
+		<th class="leftcol">F</th>	<td>0</td>	<td>1</td>	<td>1</td>	<td>0</td>
+	</tr>
+</tbody></table>
+
+<p>This really just amounts to a 4×4 matrix. Now, we could look at this 
+table, count up the number of times someone is listed as a friend, and 
+declare that to be the measure of someone's popularity. But the problem 
+with that approach is that some people will tend to list everyone they 
+know, and others will write down only their closest friends. If we try 
+to score people this way, the former type of person will have outsized 
+influence on the result.
+</p>
+
+<p>Here's an alternate approach. We'll try to account for <i>quality</i>
+ of friendship by assuming that it's better for a widely-liked person to
+ think of you as a friend. Conversely, if someone whom nobody else likes
+ considers you a friend, that doesn't make you popular.</p>
+
+<p>To account for the problem we've identified, we'll <i>normalize</i> the lists of friends, dividing each column in our matrix by the number of people in it.</p>
+
+<img class="center" style="width: 139px; height: 182px;" alt="" src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/popmatrix.gif">
+
+<p>We shall call this the <b>linking matrix</b> and shall denote it by <var><b>L</b></var>.</p>
+
+<p>
+With this data, we're going to assign to each person a number that we'll call their <b>popularity</b>: <b>r<sub>J</sub></b>, <b>r<sub>C</sub></b>, <b>r<sub>M</sub></b>, and <b>r<sub>F</sub></b>. Combined, these numbers give the <b>popularity vector</b>
+</p>
+
+<img class="center" style="width: 81px; height: 144px;" alt="" src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/popvector.gif">
+
+<p>
+for the group. For our method, we will define popularity as follows:
+</p>
+
+<p style="text-align: center">A person's popularity is the weighted sum of the popularity of people who reference that person.</p>
+
+<p>This looks like a circular definition, because we're defining 
+popularity in terms of other people's popularity. But we can explain 
+what the weights are and see how this is going to work by just writing 
+out one of the equations:</p>
+
+<p style="text-align:center">
+	<var><b>r<sub>J</sub></b> = <sup>1</sup>⁄<sub>3</sub> <b>r<sub>C</sub></b> + <sup>1</sup>⁄<sub>3</sub> <b>r<sub>M</sub></b> + <sup>1</sup>⁄<sub>2</sub> <b>r<sub>F</sub></b></var>
+</p>
+
+<p>This equation seems reasonable when we consider that June represents 
+one third of Carlos's friends, so she is "rewarded" with one third of 
+his popularity. She's also a third of Meichen's friend group, and she's 
+fully half of Felix's list. If we wrote out all four of these equations 
+and then converted to matrix-vector form, we would get exactly the 
+equation</p>
+
+<p style="text-align:center">
+	<b>Lr</b> = <b>r</b>
+</p>
+
+<p>which is the same as</p>
+
+<p style="text-align:center">
+	(<b>L</b> - <b>I</b>)<b>r</b> = <b>0</b>
+</p>
+
+<p>where <b>I</b> is the 4×4 identity matrix. If we can solve this 
+equation, that gives us the relative popularity of all four of our 
+subjects. To do that, we enter <var><b>L</b></var> into MATLAB and then use the command</p>
+
+<pre><samp>&gt;&gt; </samp><code>rref([L-eye(4)])</code>
+
+<samp>ans = 
+   1.0000        0        0  -1.5000
+        0   1.0000        0  -1.3125
+        0        0   1.0000  -1.6875
+        0        0        0        0</samp></pre>
+
+<p>We can see here that we have one free variable. If we (arbitrarily) set <b>r<sub>F</sub></b> = 1, then we'll get <b>r<sub>J</sub></b> = 1.5, <b>r<sub>C</sub></b> = 1.3125, and <b>r<sub>M</sub></b> = 1.6875. Thus, Meichen is the most popular, followed by June, then Carlos, and finally Felix.</p>
+
+<h3>PageRank</h3>
+
+<p>Some graduate students at Stanford got the idea that this sort of 
+method could be used to rank a group of web pages. You type in some key 
+words, and the software identifies a vest collection of webpages 
+containing those words. Most of these will be garbage, as far as you are
+ concerned. The challenge, then, is to automatically find a few good 
+(popular) webpages.</p>
+
+<p>The founders of Google had the software look at each webpage <var>w</var> in the set of results and determine which other webpages <var>w</var>
+ links to. Thus, each webpage produces a vector of zeros and ones, just 
+as we saw above with the students' lists of friends. Next, the algorithm
+ builds a matrix whose columns are the normalized versions of these 
+vectors. From there, it proceeds roughly the same way we did in the 
+popularity problem. Google uses special methods to compute popularity 
+very quickly, and then it lists for you the results from highest to 
+lowest popularity.</p>
+
+<p>This all sounds like a good plan, but you have to be sure of a few things before you can build a company out of this idea.</p>
+
+<ol type="a">
+	<li>Does the equation <b>Lr</b> = <b>r</b> always have a solution? (Is there anything you've seen in class so far to make you think it might not?)</li>
+	<li>Will a solution have nonnegative entries? Negative solutions might be hard to interpret.</li>
+	<li>Is the solution unique? If not, we will have conflicting rankings?</li>
+</ol>
+
+<p>Fortunately, the founders of Google knew a handy theorem.</p>
+
+<p><span class="e-n_style">Theorem (Perron–Frobenius):</span> For any matrix <var><b>L</b></var> whose entries are all nonnegative and whose columns each sum to one, the equation <b>Lr</b> = <b>r</b> has a nonnegative solution.</p>
+
+<p>Thus the Perron–Frobenius theorem says there is always a solution to 
+the popularity problem. We won't go into details on this, but the 
+theorem also tells us that the solution is usually unique, and it 
+explains the circumstances when it is not.</p>
+
+<p>In the late 1990s, the leading search engine was Yahoo; they employed
+ warehouses full of people to look at web pages and manually grade them.
+ By using this simple mathematical model (plus a few bells and 
+whistles), Google quickly displaced Yahoo. The ranking you just saw is 
+often called PageRank after Larry Page, co-founder of Google, who in a 
+few years became one of the ten wealthiest Americans. The extremely 
+basic problem we just saw is the core of the rapidly-growing field of 
+network analysis.</p>
+
+<p>Now it's time for a little practice with the PageRank algorithm.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/text.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/console.png" class="align-right" width="24" height="24">
+<p>Suppose that we have five websites: A, B, C, D, and E. Let's also 
+suppose that the links between the sites are depicted in the graph 
+below:</p>
+
+<img class="center" style="width: 385px; height: 350px;" alt="" src="2%20%EF%B8%B1%20Systems%20of%20Linear%20Equations_files/pagerank2021.PNG">
+ 
+<p>Here, the arrow pointing from C to D means that there is a hyperlink on site C that takes you to site D. 
+Recall that the third column represents the edges <b>from</b> C and thus
+ the (4,3) component of the linking matrix is 1 before the normalization
+ since there is an edge from C to D. For small sets of objects, graphs 
+like this one are a convenient way to depict connections.</p>
+
+<ol type="a">
+	<li>
+		<p>Create a linking matrix <b>L</b> containing the information of 
+which site links to which, just as we did in the popularity example. 
+Remember to normalize, and be sure that your input is exact. (For 
+example, make sure you enter 1/3 instead of 0.3333—this is important for
+ the next part of this exercise, since our columns must sum to 1.) 
+Include all input and output from MATLAB.</p>
+	</li>
+	<li>
+		<p>Use the <code>rref</code> command to find all solutions <var><b>x</b></var> to the matrix equation (<b>L</b> - <b>I</b>)<b>x</b> = <b>0</b>.
+ Include all input and output from MATLAB. If you get an error message, 
+be sure to double-check your answer for the first part of this exercise.</p>
+	</li>
+	<li>
+		<p>Which website has the highest PageRank? Explain your answer, 
+especially in light of any negative numbers that may have appeared in 
+your solutions. List the remaining websites in decreasing PageRank 
+order.</p>
+	</li>
+</ol>
+</div>
+
+<p>Obviously, the examples we have worked with so far are grossly 
+simplified. In practice, the linking matrix is often huge, and we need 
+to figure out a fast way to solve <b>Lr</b> = <b>r</b> for matrices of enormous size. Gaussian elimination on big matrices takes an extremely long time. Luckily, most entries of <var><b>L</b></var> end up being zero. Such a matrix is called a <i>sparse</i>
+ matrix, and one major branch of mathematics is devoted to solving 
+problems with sparse matrices. We will glimpse one of these methods in a
+ later assignment.
+
+<!--<h2>Feedback</h2>
+
+<p>
+This tutorial was overhauled in Fall 2016. In order to continue improving this lab, we need some (required!) feedback from you, the student.
+</p>
+
+<div class="exercise">
+<span class="e-x">: Feedback</span>
+<img alt="Include full-sentence response."
+ src="img/text.png" width="24" height="24" class="align-right">
+<p>
+Please answer the following questions on a <b>separate page</b> at the end of your assignment.
+</p>
+<ul>
+	<li>How long did this assignment take you to complete?</li>
+	<li>Have you had a course besides Math 18 that used MATLAB? If yes, which course?</li>
+	<li>Did you encounter any errors or potential errors while working through this lab?</li>
+	<li>Were there any typos or unclear statements? Please tell us where.</li>
+	<li>Do you have anything else you'd like to say about the lab?</li>
+</ul>
+<p>
+Please be as specific as possible. If you have any suggestions to submit at a later time, you can also email the head MATLAB TA at <a href="mailto:matlabta@math.ucsd.edu">matlabta@math.ucsd.edu</a>.
+</p>
+</div>
+-->
+
+</p><h2>Conclusion</h2>
+
+<p>
+Systems of linear equations are very basic mathematical objects that 
+nevertheless show up in many interesting places. We've seen just two 
+such applications today. Because the linear systems that show up in 
+real-world settings tend to be absolutely enormous, it's impractical to 
+work with them by hand. Computer programs like MATLAB are indispensable 
+tools for people who must interact with such systems in their work.
+</p>
+
+<hr>
+<i id="mod">Last Modified: 8 January 2017</i>
+
+</div>
+
+
+</div>
+
+
+
+</body></html>

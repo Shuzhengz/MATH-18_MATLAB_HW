@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+	<title>1 ︱ Introduction to MATLAB</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Math 18 MATLAB Assignment 1">
+	<link rel="stylesheet" href="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/styles.css">
+</head>
+
+<body style="counter-reset:section 0">
+<div class="content">
+
+<div class="menu">
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html">Main</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html">FAQ</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html#quiztimes">Quiz Times</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/tutorhours.html">Tutor
+Hours</a>
+</p>
+
+</div>
+
+<div class="main">
+
+<h1>Introduction to MATLAB</h1>
+
+<hr>
+
+<p>
+Welcome to the MATLAB component of Math 18! If you are reading this, you
+ have probably successfully logged in to a PC; if not, go <a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html#login">here</a>
+ for instruction on how to do that. You now need to run both MATLAB and a
+ word processor—we'll assume you're using Microsoft Word. Instructions 
+for that are <a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html#runningMW">here</a>.
+</p>
+
+<p>
+In the header of your Word document, be sure to include your <b>name, lecture code (e.g., Math 18 A00) &amp; your PID</b>. 
+</p>
+
+<p>
+As you complete a lab assignment, you should read along, enter all the commands listed in the tutorials, and work through the <span class="e-g_style">Examples</span>. However, in your Word document, you need only include your responses to the <span class="e-x_style">Exercises</span>.
+ Each response should clearly indicate which exercise it answers. The 
+exercises will require different kinds of responses; the type of answer 
+we are looking for will be marked by some combination of the icons 
+described below.
+</p>
+
+<table id="responses">
+	<thead>
+		<tr>
+			<th style="width:5%">Icon</th>
+			<th style="width:25%">Item</th>
+			<th style="width:70%">Comments</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td> <img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" width="32" height="32"> </td>
+			<td>Commands entered in MATLAB &amp; resulting
+output</td>
+			<td>You should copy relevant input and output from
+MATLAB and paste it into your Word document. You need only include commands that worked.</td>
+		</tr>
+		<tr>
+			<td> <img alt="Include plots and graphs." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/graph.png" width="35" height="31"> </td>
+			<td>Plots &amp; graphs</td>
+			<td>Include all graphs generated in an exercise
+unless the problem specifically tells you which/how many to include.</td>
+		</tr>
+		<tr>
+			<td> <img alt="Include full-sentence response." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/text.png" width="32" height="32"> </td>
+			<td>Full sentence response</td>
+			<td>Answer questions with at least one or two complete sentences. Even if
+you're stuck, write down any reasoning or ideas you've had.</td>
+		</tr>
+		<tr>
+			<td> <img alt="Do work manually." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/pencil.png" width="32" height="32"> </td>
+			<td>Requires manual work</td>
+			<td>Do scratch work without using MATLAB. Record this work in your Word document, either by typing it or scanning it.</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>
+It is good practice to save your work as you go, in case of computer crash, power outage, etc.
+</p>
+
+<p>
+We encourage you to <b>talk to your fellow students</b> while you work 
+through the assignments. If you're stuck, try introducing yourself to 
+your neighbor. Feel free to discuss responses to difficult exercises. 
+However, in the end, <b>you must submit your own work written in your own words!</b>
+</p>
+
+<p style="color: #ff0000">
+<strong>Identical responses will be penalized at the grader's discretion!</strong>
+</p>
+
+<p>
+Finally, there is one last important thing you should be aware of: the MATLAB quiz. 
+It will take place in Week 10.
+
+Information about the quiz is available on the <a href="https://mathweb.ucsd.edu/~math18m/index.html">main page</a>. 
+</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/text.png" class="align-right" width="24" height="24">
+<ol type="a">
+	<li>	What is the date of your MATLAB quiz? What day of the week is that?</li>
+	<li> When is each homework due? What day of the week is that? </li>
+	<!-- <li>	What time is your MATLAB quiz?</li>
+	<li>	Where is your MATLAB quiz?</li>
+	<li>	When does registration for an alternative time close? If you miss the deadline, will you be able to sign up for an alternative time if there are still spots available at that time?</li>
+	<li>	If you miss the quiz for any reason other than an emergency, will you be able to make it up?</li>
+	<li>	At the top of this page, make sure to include your name, your TA's name, and your section number and time.</li> -->
+</ol>
+</div>
+
+
+<h2>First Steps</h2>
+
+<p>
+Our goal in this first lab is to get acquainted with MATLAB and learn 
+how it handles matrices. After you've run MATLAB, it should be sitting 
+there with a prompt:
+</p>
+
+<samp>&gt;&gt;</samp>
+
+<p>
+When working through examples or exercises, you should omit the prompt (<samp>&gt;&gt;</samp>) and just type the commands that follow it (which are displayed like <code>this</code>).
+ When you are given commands in either examples or exercises, instead of
+ typing them into MATLAB yourself, you may want to consider copying the 
+text from the webpage and pasting it into MATLAB next to the prompt. 
+This can help avoid inadvertent errors.
+</p>
+
+<h3>Basic Operations</h3>
+
+<p>
+We can use MATLAB to do simple addition (<code>+</code>), subtraction (<code>-</code>), multiplication (<code>*</code>), division (<code>/</code>), and exponentiation (<code>^</code>).
+</p>
+
+<div class="example">
+<span class="e-g"></span>
+<p>
+Let's use MATLAB to calculate <var>100<sup><sup>3</sup>⁄<sub>2</sub></sup> + <sup>(5·7 - 99)</sup>⁄<sub>2</sub></var>. We enter this as
+</p>
+
+<samp>&gt;&gt; </samp><code>100^(3/2) + (5*7 - 99)/2</code>
+
+<p>
+and press the Return key. MATLAB responds
+</p>
+
+<pre><samp>ans =
+   968
+</samp></pre>
+
+<p>
+Notice the use of parentheses! MATLAB respects the usual order of 
+operations. Namely, if no parentheses are used, then exponentiation is 
+done first, then multiplication &amp; division (from left to right), and
+ finally addition &amp; subtraction. If you're ever in doubt about how 
+something will be evaluated, <em>use parentheses</em>.
+</p>
+
+<p>Strictly speaking, we don't have to put spaces between the numbers and the symbols, but they help make our code more readable.</p>
+</div>
+
+<p>
+<span class="e-n"></span> By far the most common source of errors in 
+this course will be data entry errors—that is, errors made by typing 
+commands or data incorrectly. Make sure you understand how MATLAB works 
+with the order of operations, and use parentheses as needed to designate
+ the correct order of operations. <em>This will save you a lot of trouble down the road.</em>
+</p>
+
+<h2>Naming Variables</h2>
+
+<p>
+MATLAB allows us to use letters (or more generally, a letter followed by
+ any string of letters, numbers, and underscores) to assign names to 
+variables. This allows us to easily reuse past results.
+</p>
+
+<div class="example">
+<span class="e-g"></span>
+<p>
+Suppose we'd like to assign the value 5 to the variable <var>x</var>. In MATLAB, we type
+</p>
+
+<pre><samp>&gt;&gt; </samp><code>x = 5</code>
+
+<samp>x =
+   5</samp></pre>
+
+<p>
+Unless we later redefine <code>x</code>, MATLAB will replace <code>x</code> with 5 every time <code>x</code> appears in a calculation. Let's define a few more variables by their place in the alphabet:
+</p>
+
+<samp>&gt;&gt; </samp><code>l = 12; i = 9; n = 14; e = 5; a = 1; r = 18; g = 7; b = 2;</code>
+
+<p>
+Notice that when you run this code, you don't get any output. The 
+semicolons here after each command tell MATLAB to suppress output.
+</p>
+
+<p>
+You can also assign names that are longer than a single letter, like so:
+</p>
+
+<pre><samp>&gt;&gt; </samp><code>DaysPerYear = 365</code>
+
+<samp>DaysPerYear =
+   365</samp></pre>
+
+<p>Note that spaces are not allowed in variable names, so you can't define a variable called <code>Days Per Year</code>. You should also be aware that MATLAB is case-sensitive. If we accidentally type <code>daysperyear</code>, we'll get an error message:   
+
+</p><pre><samp>&gt;&gt; </samp><code>daysperyear</code>
+
+<samp>??? Undefined function or variable 'daysperyear'.</samp></pre>
+
+<p>
+Using the variables we just defined, we can do some calculations and assign names to the results.
+
+</p><pre><samp>&gt;&gt; </samp><code>leapyear = DaysPerYear + 1</code>
+
+<samp>leapyear =
+   366</samp>
+   
+<samp>&gt;&gt; </samp><code>linearalgebra = l+i+n+e+a+r+a+l+g+e+b+r+a</code>
+
+<samp>linearalgebra =
+   105</samp></pre>
+<p></p>
+</div>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Define each letter of your first and last names to be the number 
+corresponding to its place in the alphabet. Then set your name, without 
+any spaces, equal to the sum of the letters. 
+</p>
+</div>
+
+<h2>Hints &amp; Tips</h2>
+
+<p>MATLAB has a number of time-saving features that are worth learning now.</p>
+
+<p>
+<b>The semicolon.</b> We've mentioned this already, but it's important 
+enough to highlight again. You'll notice while working with MATLAB that 
+some commands will generate extremely long output. For example, try 
+typing the following:
+</p>
+<samp>&gt;&gt; </samp><code>m = -3:0.4:12</code>
+
+<p>
+On the other hand, if we enter the following: (notice the semicolon!)
+</p>
+<samp>&gt;&gt; </samp><code>n = 4:2:200;</code>
+<p>
+there is no output. MATLAB has carried out the command, but the 
+semicolon tells it not to print the result. If at some point later on, 
+we'd like to see the output, we can do so by typing
+</p>
+<samp>&gt;&gt; </samp><code>n</code>
+<p>
+For this course, we will usually include the semicolon in the example 
+code if the output is excessively long or if the output is routine (for 
+example, if we are just assigning a name to a constant and we already 
+know what the output is going to be). Except in these two cases, you 
+need to include any outputs related to the exercises.
+</p>
+
+<p>
+<b>Shift+Enter.</b> We haven't had any need to do this so far, but it 
+will be useful later to be able to run multiple inputs all at once, 
+without typing out and running each line in sequence. You can jump to a 
+new line without running your code by typing Shift+Return or 
+Shift+Enter. 
+</p>
+
+<p>
+<b>The up-arrow key.</b> Bring up the main MATLAB window and try pushing
+ the up-arrow key on the keyboard once. Then push it a few more times. 
+Notice that this is bringing your previously-entered commands back onto 
+the command line. You can also use the left and right arrow keys to 
+position the cursor in a command in order to edit it. This is a great 
+way to correct a command that had an error in it.
+</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Suppose we want to evaluate the expression
+</p>
+<div class="center"><img style="width: 238px; height: 55px;" alt="" src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/expression1.gif"></div>
+ <p>
+ Enter the command
+ </p>
+ <samp>&gt;&gt; </samp><code>z = 25-(100-7exp(5+cos(pi/3))</code>
+ <p>
+ You will get an error message. Use the up-arrow to bring this line 
+back, and then use the left and right arrow keys to correct the 
+error(s). Include the wrong command, the error message, and your fix in 
+your homework. [Hint: Multiplication and parentheses are good things to 
+check.]
+ </p>
+</div>
+
+<h2>Computer Algebra</h2>
+
+<p>
+One of the most useful features of MATLAB is its ability to do what is known as <i>symbolic manipulation</i>,
+ which includes things like solving an equation for a particular 
+variable. But first, we must declare what variables we are going to be 
+using. Do this by the <code>syms</code> command:
+</p>
+
+<samp>&gt;&gt; </samp><code>syms x y</code>
+
+<p>
+Now type
+</p>
+
+<samp>&gt;&gt; </samp><code>a = (x + y)^3</code>
+<pre><samp>a =
+   (x + y)^3</samp></pre>
+   
+<p>
+Note that you will receive an error message if you failed to first input <code> syms x y</code> as above. If we wanted to expand the cubic here, we could now type
+</p>
+
+<samp>&gt;&gt; </samp><code>expand(a)</code>
+<pre><samp>ans =
+   x^3 + 3*x^2*y + 3*x*y^2 + y^3</samp></pre>
+   
+<p>
+Conversely, you could start with this last expression and factor it:
+</p>
+
+<samp>&gt;&gt; </samp><code>factor(x^3 + 3*x^2*y + 3*x*y^2 + y^3)</code>
+<pre><samp>ans =
+   (x + y)^3</samp></pre>
+
+<p>
+MATLAB also does differentiation and integration with <code>diff</code> and <code>int</code>. To take the derivative of, say, <var>sin(x)</var>, type in:
+</p>
+
+<samp>&gt;&gt; </samp><code>diff(sin(x))</code>
+<pre><samp>ans =
+   cos(x)</samp></pre>
+   
+<p>
+MATLAB also allows us to differentiate functions of more than one variable. Let us use MATLAB to differentiate <var>sin(x + 3y)</var>:
+</p>
+<samp>&gt;&gt; </samp><code>diff(sin(x+3*y))</code>
+<pre><samp>ans =
+   cos(x + 3*y)</samp></pre>
+   
+<p>
+Note that MATLAB takes the derivative with respect to <var>x</var> and not <var>y</var>;
+ by default, it will choose whichever symbol is closest to the letter X 
+in the alphabet. If we wanted to take the derivative with respect to <var>y</var> instead, we would type
+</p>
+<samp>&gt;&gt; </samp><code>diff(sin(x+3*y),y)</code>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Compute the derivative of <var>log(cos(t)-3*s)</var> with respect to <var>t</var>. Next, differentiate the same function with respect to <var>s</var> instead. Include the input and output in your Word document.
+</p>
+</div>
+
+<p>
+We will not be using these particular tools for the rest of the Math 18 
+MATLAB course, but they might be useful to you in other settings.
+</p>
+
+<h2>MATLAB's Built-in Help</h2>
+
+<p>
+While these labs are written to be as self-contained as possible, you 
+may find that you've forgotten what a MATLAB command does, or you may 
+wonder what else MATLAB can do. Fortunately, MATLAB has an extensive 
+built-in help system. If you ever get stuck or need more info, one 
+excellent way to get help in MATLAB is by entering
+</p>
+<samp>&gt;&gt; </samp><code>doc</code>
+<p>
+This command will take you to MATLAB's searchable documentation, where 
+you can learn how to use all the built-in MATLAB commands by reading 
+their help files. This is a particularly good resource when you know 
+what you want to do but don't know which commands to use. For example, 
+if you want to integrate something but don't know how, a search for 
+"integral" will suggest both <code>integral</code> and <code>int</code>.
+</p>
+
+<p>
+If you already know which command you want, but you've forgotten how 
+exactly it works, one quick way to access its documentation is to enter <code>help</code>
+ followed by the name of your command. This will usually give you a 
+brief description of the command, some examples, and a list of related 
+commands.
+
+</p><div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/text.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Compute <var>arcsin(1)</var> using MATLAB. Include the outputs in MATLAB. [Hint: Start by looking at <code>help sin</code>, or perhaps <code>doc arcsine</code>.]
+</p>
+</div>
+
+<p>
+If you are ever looking to get help with more general math topics, <a href="https://en.wikipedia.org/wiki/Main_Page">Wikipedia</a> is an excellent resource.
+</p>
+
+<h2>Matrices in MATLAB</h2>
+
+<p>
+If we want to do any linear algebra with MATLAB, we first have to learn 
+how to construct a matrix (or vector) in the program. To do so, we use 
+the square brackets, <code>[</code> and <code>]</code>. The left bracket <code>[</code> tells MATLAB that we are starting a matrix, and the right bracket <code>]</code>
+ tells MATLAB that we are finished. The entries of the matrix are 
+entered in rows from left to right. To separate the entries in a row, we
+ can use either a space or a comma (<code>,</code>). To mark the end of a row, use a semicolon (<code>;</code>). (This is not the same as using the semicolon to suppress output.)
+</p>
+
+<p>
+So, to construct the following matrix in MATLAB,
+</p>
+
+<p>
+we have two possibilities:
+</p>
+
+<pre><samp>&gt;&gt; </samp><code>A = [2 1; 4 3]</code>
+<samp>&gt;&gt; </samp><code>A = [2,1; 4,3]</code></pre>
+
+<p>
+Both will yield the desired matrix:
+</p>
+
+<pre><samp>A =
+   2   1
+   4   3</samp></pre>
+   
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Input the following matrix into MATLAB:
+</p>
+
+<div class="center"><img style="width: 497px; height: 164px;" alt="" src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/fibonacci.gif"></div>
+
+ <p> Include your commands and outputs in MATLAB. </p>
+</div>
+
+<h2>Matrix Operations and Manipulation</h2>
+<p>
+We often wish to take a matrix that we have defined and have MATLAB tell
+ us information about it. For example, maybe we want to know what number
+ is in the third row and fourth column, or maybe we want to view the 
+whole fifth row. These tasks are done with regular parentheses, <code>(</code> and <code>)</code>.
+</p>
+
+<div class="example">
+<span class="e-g"></span>
+<p>
+To see the (1, 2) entry of the matrix <b>A</b> above (that is, the entry in the first row and second column), we use the command
+</p>
+
+<samp>&gt;&gt; </samp><code>A(1,2)</code>
+
+<p>
+We can also use the colon <code>:</code> to mean "all," as in the command
+</p>
+
+<samp>&gt;&gt; </samp><code>A(2,:)</code>
+
+<p>
+which will give us the entire second row of the matrix <b>A</b>. The colon can also be used to represent a range of rows or columns: the command
+</p>
+
+<samp>&gt;&gt; </samp><code>Fibonacci(2:4,1)</code>
+
+<p>
+will give us the entries of <var>Fibonacci</var> from the second through fourth rows in the first column.
+</p>
+</div>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Using the commands introduced above, construct a new matrix with whatever name you like from <var>Fibonacci</var> that consists of the elements in the last two rows and the middle two columns of <var>Fibonacci</var>.
+ (The result should therefore be a 2×2 matrix.) Be sure to include the 
+command you used and the resultant output in your Word document.
+</p>
+</div>
+
+<p>
+Two matrices <b>A</b> and <b>B</b> can be added together or subtracted 
+from each other only if they are the same size. If they are not, MATLAB 
+will respond with an error.
+</p>
+
+<h2>Random Matrices</h2>
+
+<p>
+From time to time, you will want to work with matrices whose elements 
+are random. However, when you need a random matrix, it's not good enough
+ to just make a matrix with numbers that pop up in your head—humans are 
+notoriously bad at generating randomness. In fact it's also difficult 
+for computers to create truly random numbers, but MATLAB includes 
+algorithms that generate "pseudorandom" numbers. These are close enough 
+to being truly random for many purposes.
+</p>
+
+<p>
+We will generate random matrices with the <code>rand()</code> command. Notice the parentheses here; when a command requires some type of input (an <i>argument</i>), that argument must be put in parentheses. In this case, the argument for <code>rand()</code> indicates the size of the matrix that MATLAB should create. Hence, typing
+</p>
+
+<samp>&gt;&gt; </samp><code>rand(n)</code>
+
+<p>
+will tell MATLAB to create a random <var>n</var>×<var>n</var> matrix whose entries are decimal values between 0 and 1. If we type
+</p>
+
+<samp>&gt;&gt; </samp><code>RMatrix1 = rand(2)</code>
+
+<p>
+we will see something like the following (but with different numbers):
+</p>
+
+<pre><samp>RMatrix1 =
+   0.9501   0.6068
+   0.2311   0.4860</samp></pre>
+   
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/text.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="1%20%EF%B8%B1%20Introduction%20to%20MATLAB_files/console.png" class="align-right" width="24" height="24">
+<p>
+Create two random 4×4 matrices named <b>A</b> and <b>B</b>. Do you expect <b>A</b> + <b>B</b> and <b>B</b> + <b>A</b> to be equal? Compute those two sums using MATLAB. Are they in fact the same?
+</p>
+</div>
+
+
+   
+<!--<h2>Feedback</h2>
+
+<p>
+This tutorial was overhauled in Fall 2016. In order to continue improving this lab, we need some (required!) feedback from you, the student.
+</p>
+
+<div class="exercise">
+<span class="e-x">: Feedback</span>
+<img alt="Include full-sentence response."
+ src="img/text.png" width="24" height="24" class="align-right">
+<p>
+Please answer the following questions on a <b>separate page</b> at the end of your assignment.
+</p>
+<ul>
+	<li>How long did this assignment take you to complete?</li>
+	<li>Have you had a course besides Math 18 that used MATLAB? If yes, which course?</li>
+	<li>Did you encounter any errors or potential errors while working through this lab?</li>
+	<li>Were there any typos or unclear statements? Please tell us where.</li>
+	<li>Do you have anything else you'd like to say about the lab?</li>
+</ul>
+<p>
+Please be as specific as possible. If you have any suggestions to submit at a later time, you can also email the head MATLAB TA at <a href="mailto:matlabta@math.ucsd.edu">matlabta@math.ucsd.edu</a>.
+</p>
+</div>
+-->
+
+<h2>Conclusion: Submitting Labs</h2>
+
+<p>
+That's about it for Lab 1! At this point, your Word document should be 
+ready to submit. In order to submit your document, you need to be 
+enrolled in this course at <a href="http://www.gradescope.com/">Gradescope</a>.
+ This should happen automatically during the first week. However, if at 
+the end of week 1 you do not yet have access to your class's MATLAB 
+Gradescope page, you should contact your regular discussion section TA 
+and explain the situation. Give them your name, UCSD email address, and 
+PID, and they'll be able to add you to the course manually.</p>
+
+<p>
+	Please note that when submitting HWs on gradescope, you're required to <b>assign correct pages</b>
+ to your problems. If your solution to a problem consists of a few 
+pages, you should include all of them. This will greatly help the 
+graders find your work. Otherwise they have to scroll up and down to 
+look for your answers and this is a lot of work since there are usually 
+hundreds of HWs to grade. We should warn you that <b>a few points will be deducted if you don't number the pages correctly.</b>
+	</p>
+
+<!--<p>To do so, you'll need to set up an account there and then click "Enroll in Course." You'll be asked for an entry code; find the one that matches your class in the table below. <b>When you enroll manually, make sure to include your entire student ID (including the "A") and use your UCSD email address.</b>
+</p>
+
+<table id="gradescope">
+	<tr style=" border-bottom: 1px solid #4a00b8">
+		<th>
+			<b>Lecture</b>
+		</th>
+		<th>
+			<b>Lecture Time</b>
+		</th>
+		<th>
+			<b>Instructor</b>
+		</th>
+		<th>
+			<b>Entry Code</b>
+		</th>
+	</tr>
+	<tr>
+		<th>
+			A
+		</th>
+		<th>
+			10 am
+		</th>
+		<th class="leftcol">
+			Ying
+		</th>
+		<td>
+			92J4G9
+		</td>
+	</tr>
+	<tr>
+		<th>
+			B
+		</th>
+		<th>
+			12 pm
+		</th>
+		<th class="leftcol">
+			Eggers
+		</th>
+		<td>
+			MR2EWM
+		</td>
+	</tr>
+	<tr>
+		<th>
+			C
+		</th>
+		<th>
+			1 pm
+		</th>
+		<th class="leftcol">
+			Kemp
+		</th>
+		<td>
+			9PB4X9
+		</td>
+	</tr>
+	<tr>
+		<th>
+			D
+		</th>
+		<th>
+			4 pm
+		</th>
+		<th  class="leftcol">
+			Xin
+		</th>
+		<td>
+			M6NYGM
+		</td>
+	</tr>
+</table>
+-->
+
+<p>To turn in your work, your document needs to be in PDF format. If 
+you're using Word, once you've saved your document, you can export it as
+ a PDF in the <b>File ❯ Export</b> menu; alternatively, you can go to <b>File ❯ Save As</b>
+ and choose "PDF" in the drop-down menu near the bottom. Once you've 
+done this, open the Math 18 MATLAB course on Gradescope, find Assignment
+ 1, and submit your PDF for this assignment.</p>
+
+<p>
+After you have saved and uploaded your lab document, <b>remember to log out of your PC</b>.
+</p>
+
+<p>
+A few final comments and warnings:
+</p>
+
+<ol>
+	<li> TAs are available for help during lab time, not via email the night before the assignment is due.</li>
+	<li> No emailing labs to TAs.</li>
+</ol>
+
+<p>
+The future labs will contain most of the applications of linear algebra 
+to be found in Math 18. These problems can take a little while to work 
+out. <b>Be warned that future labs will be longer than this one!</b> Don't wait until the last minute to start.
+</p>
+
+<hr>
+<i id="mod">Last Modified: 8 January 2017</i>
+
+</div>
+
+
+</div>
+
+
+
+</body></html>
