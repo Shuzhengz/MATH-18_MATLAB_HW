@@ -1,6 +1,5 @@
 # MATLAB HW 2
 
-<br/><br/>
 
 ## Exercise 2.1
 
