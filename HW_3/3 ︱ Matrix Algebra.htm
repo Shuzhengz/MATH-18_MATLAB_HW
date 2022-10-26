@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+	<title>3 ︱ Matrix Algebra</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Math 18 MATLAB Assignment 2">
+	<link rel="stylesheet" href="3%20%EF%B8%B1%20Matrix%20Algebra_files/styles.css">
+</head>
+
+<body style="counter-reset:section 2">
+<div class="content">
+
+<div class="menu">
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html">Main</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html">FAQ</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html#quiztimes">Quiz Times</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/tutorhours.html">Tutor
+Hours</a>
+</p>
+
+</div>
+
+<div class="main">
+
+<h1>Matrix Algebra</h1>
+
+<hr>
+
+<p>
+We've seen how to use MATLAB to row-reduce matrices and solve linear 
+systems; now we're going to use it to perform other basic matrix 
+operations. In a sense, matrices are a bit like real numbers: we can 
+add, subtract, and multiply them, provided they have appropriate 
+dimensions. Some square matrices also have a multiplicative inverse. But
+ there are a handful of striking differences. For example, when 
+multiplying matrices, it is not generally true that <b>AB</b> = <b>BA</b>, and <var><b>A</b><sup>2</sup></var> may be zero even when <var><b>A</b></var> is not the zero matrix. Keep these things in mind as you work through this lab.
+</p>
+
+<h2>Basic Matrix Operations</h2>
+
+<p>You've learned in class by now that we can add two matrices of the 
+same dimensions by just adding the corresponding entries. The operator 
+MATLAB uses for matrix addition is the simple plus sign <code>+</code>, the same one used for regular addition of numbers. If we enter the matrices</p>
+
+<pre><samp>&gt;&gt; </samp><code>A = [1 2 3 4; 5 6 7 8]</code>
+<samp>&gt;&gt; </samp><code>B = [8 7 6 5; 4 3 2 1]</code></pre>
+
+<p>into MATLAB, we can then add them by typing</p>
+
+<pre><samp>&gt;&gt; </samp><code>A+B</code>
+
+<samp>ans =
+    9    9    9    9
+    9    9    9    9</samp></pre>
+    
+<p>
+Matrix multiplication works as you would expect—you simply need the 
+number of columns of the first matrix to be equal to the number of rows 
+of the second one. For example, we could enter the following matrices 
+into MATLAB:
+</p>
+
+<pre><samp>&gt;&gt; </samp><code>C = [1 2; 1 0]</code>
+<samp>&gt;&gt; </samp><code>D = [0 1; 1 1]</code></pre>
+
+<p>Now we can multiply them:</p>
+
+<pre><samp>&gt;&gt; </samp><code>C*D</code>
+
+<samp>ans =
+    2    3
+    0    1</samp></pre>
+
+<p>
+We can also exponentiate matrices (as in <code>A^3</code>). Lastly, we can ask MATLAB to compute the tranpose of a matrix with an apostrophe (<code>'</code>):
+</p>
+
+<pre><samp>&gt;&gt; </samp><code>C'</code>
+
+<samp>ans =
+    1    1
+    2    0</samp></pre>
+    
+<h2>Matrix Inversion</h2>
+
+<p>
+One of the key differences between matrix multiplication and 
+multiplication of real numbers is in the existence of multiplicative 
+inverses. If <var>x</var> is a nonzero real number, then there's always another number (namely <var><sup>1</sup>⁄<sub>x</sub></var>) that you can multiply by <var>x</var> to get the multiplicative identity (1). With matrices, we'd like to do the same thing: given a matrix <var><b>A</b></var>, we want to find another matrix <var><b>B</b></var> such that <var><b>AB</b> = <b>BA</b> = <b>I</b></var>, where <var><b>I</b></var> is an identity matrix.
+</p>
+
+<p>
+Just by looking at the condition <var><b>AB</b> = <b>BA</b> = <b>I</b></var>, we can see that <var><b>A</b></var> and its inverse <var><b>B</b></var>
+ have to be square matrices of the same dimension. Unfortunately, even 
+square nonzero matrices can fail to have an inverse. If an inverse 
+exists, we say that <var><b>A</b></var> is <i>invertible</i> (or sometimes <i>non-singular</i>); otherwise, we say it is <i>non-invertible</i> (<i>singular</i>).
+</p>
+
+<p>
+The MATLAB command <code>inv</code> finds the inverse of a matrix if it exists.
+</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/text.png" class="align-right" width="24" height="24">
+<ol type="a">
+	<li>
+		<p>Try using the <code>inv</code> command to find the inverse of the matrix</p>
+		
+		<img class="center" style="border: 0px solid ; width: 85px; height: 46px;" alt="" src="3%20%EF%B8%B1%20Matrix%20Algebra_files/matrix-1-100.gif">
+		
+		<p>Notice the strange output. Include your command and the output in your write-up.</p>
+	</li>
+	<li>
+		<p>Now enter the following matrix <b>A</b> into MATLAB:</p>
+		
+		<!-- <samp>&gt;&gt; </samp><code>A = [4 9; 5 11]</code>
+		
+		<p>Define <b>B</b> to be its inverse in MATLAB. Then run the commands</p>
+		
+		<pre><samp>&gt;&gt; </samp><code>A*B</code>
+<samp>&gt;&gt; </samp><code>B*A</code></pre>
+		
+		<p>to check that it satisfies the definition of inverse. Include your commands and their output in your write-up. (Note that MATLAB may give you entries like <samp>-0.0000</samp> in your results. This still counts as 0 for our purposes.)</p>
+	</li>
+	<li>
+		<p>Enter the following column vector <b>x</b>:</p>
+		
+		<samp>&gt;&gt; </samp><code>x = [5; 10]</code>
+		
+		<p>Use the following command to multiply <b>A</b> by <b>x</b>:</p>
+		
+		<samp>&gt;&gt; </samp><code>y = A*x</code> -->
+
+		<samp>&gt;&gt; </samp><code>A = [5 3; 7 4]</code>
+		
+		<p>Define <b>B</b> to be its inverse in MATLAB. Then run the commands</p>
+		
+		<pre><samp>&gt;&gt; </samp><code>A*B</code>
+<samp>&gt;&gt; </samp><code>B*A</code></pre>
+		
+		<p>to check that it satisfies the definition of inverse. Include your 
+commands and their output in your write-up. (Note that MATLAB may give 
+you entries like <samp>-0.0000</samp> in your results. This still counts as 0 for our purposes.)</p>
+	</li>
+	<li>
+		<p>Enter the following column vector <b>x</b>:</p>
+		
+		<samp>&gt;&gt; </samp><code>x = [2; 3]</code>
+		
+		<p>Use the following command to multiply <b>A</b> by <b>x</b>:</p>
+		
+		<samp>&gt;&gt; </samp><code>y = A*x</code>
+		
+		<p>As usual, include your input and output in your write-up.</p>
+	</li>
+	<li>
+		<p>Without entering anything into MATLAB, what do you think you'll get if you multiply <b>B</b> by <b>y</b>? Explain your answer.
+	</p></li>
+	<li>
+		<p>Use MATLAB to check your answer to the last question, and include your input and output in your document.</p>
+	</li>
+</ol>
+</div>
+
+<h2>Logistics: Route Planning</h2>
+
+<p>Suppose we have a business operating in five cities around the 
+Pacific Rim: San Diego, Los Angeles, Tokyo, Shanghai, Manila, and 
+Seattle. We are interested in counting the number of ways we can travel 
+from one city to another with at most <var>n</var> stopovers. We look up all the direct flights and put them in a table:
+</p>
+
+<!-- <table class="twocol">
+	<tr>
+		<th></th>	<th>Destination</th>
+	</tr>
+	<tr>
+		<th class="leftcol">San Diego</th>	<td>San Francisco</td>
+	</tr>
+	<tr>
+		<th class="leftcol">San Francisco</th>	<td>San Diego, Tokyo, Shanghai, Manila, Honolulu</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Tokyo</th>	<td>San Francisco, Shanghai, Manila</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Shanghai</th>	<td>San Diego, San Francisco, Tokyo, Manila</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Manila</th>	<td>Tokyo, Shanghai, Honolulu</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Honolulu</th>	<td>San Francisco, Shanghai, Manila</td>
+	</tr>
+</table> -->
+<table class="twocol">
+	<tbody><tr>
+		<th></th>	<th>Destination</th>
+	</tr>
+	<tr>
+		<th class="leftcol">San Diego</th>	<td>Los Angeles, Seattle</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Los Angeles</th> <td>San Diego, Tokyo, Shanghai, Manila, Seattle</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Tokyo</th>	<td>Los Angeles, Shanghai, Manila, Seattle</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Shanghai</th>	<td>Los Angeles, Tokyo, Manila, Seattle</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Manila</th>	<td>Tokyo, Shanghai</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Seattle</th> <td>San Diego, Los Angeles, Tokyo, Shanghai</td>
+	</tr>
+</tbody></table>
+
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/text.png" class="align-right" width="24" height="24">
+
+<p>List all possible ways to get from San Diego to Manila with <i>exactly</i> two stops.</p>
+<p>
+[For example, the trip going from Manila through Tokyo, then LA, then Seattle is a trip with <b>exactly two stops</b> from Manila to Seattle.]
+</p>
+</div>
+
+<p>Doing that last exercise by hand is a pain because there are so many 
+cases to check, and this is a relatively simple example. If we want to 
+do this efficiently, linear algebra is the perfect tool. We'll start by 
+encoding the data from our table into what's called an <i>adjacency matrix</i>.</p>
+
+<p>
+The first step is to number our cities in the order they are listed: San
+ Diego is 1, LA is 2, and so on. We now determine the entries of our 
+adjacency matrix, which we will call <var><b>A</b></var>, using the following rule: if there is a flight from city <var>i</var> to city <var>j</var>, then the entry <var><b>A</b><sub>ij</sub></var>
+ is set to be 1. Otherwise, we set that entry to be 0. We will also set 
+all of the diagonal entries to be 0, since you can't take a flight from a
+ city to itself. This procedure gives us the following matrix <var><b>A</b></var>:
+</p>
+
+<img class="center" style="border: 0px solid ; width: 329px; height: 301px;" alt="" src="3%20%EF%B8%B1%20Matrix%20Algebra_files/adjacency2021.png">
+
+<p>
+What's neat about this is that the powers of <var><b>A</b></var> have useful information too. For example, take the entry <var>(<b>A</b><sup>2</sup>)<sub>36</sub></var> (i.e., the entry of <var><b>A</b><sup>2</sup></var> in the third row and sixth column). We compute this as
+</p>
+
+<p class="center">
+<var>(<b>A</b><sup>2</sup>)<sub>36</sub> = <b>A</b><sub>31</sub><b>A</b><sub>16</sub> + <b>A</b><sub>32</sub><b>A</b><sub>26</sub> + <b>A</b><sub>33</sub><b>A</b><sub>36</sub> +  <b>A</b><sub>34</sub><b>A</b><sub>46</sub> + <b>A</b><sub>35</sub><b>A</b><sub>56</sub> + <b>A</b><sub>36</sub><b>A</b><sub>66</sub></var>
+</p>
+
+<p>
+Let's look at the terms here: <var><b>A</b><sub>3k</sub><b>A</b><sub>k6</sub></var> is 1 if and only if both <var><b>A</b><sub>3k</sub></var> and <var><b>A</b><sub>k6</sub></var> are 1. This means we get a 1 for the <var>k</var><sup>th</sup> term if and only if we can fly from Tokyo (city 3) to city <var>k</var> and from city <var>k</var> to Honolulu (city 6). Thus, <var>(<b>A</b><sup>2</sup>)<sub>36</sub></var> counts the number of ways to fly from Tokyo to Honolulu with exactly one stop. Similar reasoning shows that <b> the number of ways of flying from city <var>i</var> to city <var>j</var> with exactly <var>n</var> stops is just <var>(<b>A</b><sup>n+1</sup>)<sub>ij</sub></var> </b>.
+</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include full-sentence response." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/text.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/console.png" class="align-right" width="24" height="24">
+<ol type="a">
+	<li>
+		Enter the above adjacency matrix <var><b>A</b></var> into MATLAB. By looking at the entry of <var><b>A</b><sup>3</sup></var>
+ in the first row and the fifth column, find the number of ways to get 
+from San Diego to Manila with exactly two stops. Include your input and 
+output in your document. 
+		Does your answer here agree with your explicit count in the previous 
+exercise? If not, add the missing trips to your answers of the previous 
+exercise. 
+		
+		<!-- [Note that a trip with some city occuring twice is still a valid trip even though few people would do that in real life.] -->
+	</li>
+	<li>
+		Now use MATLAB find the number of ways to get from  Manila to Seattle with <i>at most</i> four stops. Note that this is not the same as finding the number of ways with <i>exactly</i> four stops! Include all of your commands and output in your write-up. 
+	</li>
+</ol>
+</div>
+
+<p><span class="e-n"></span> As you may have realized, the method we've 
+just used counts silly trips like Manila → Shanghai → Seattle → Shanghai
+ → Seattle as a trip with three stops although few people would do that 
+in real life. So the number may seem large. User beware!</p>
+
+<h2>Political Science: Electoral Trends</h2>
+
+<p>
+We've already seen how linear algebra can be used to evaluate simple 
+social networks. Now we're going to look at another kind of sociological
+ situation, where we'll try to use matrices to model future population 
+dynamics.
+</p>
+
+<p>
+In California, when you register to vote, you declare a party 
+affiliation. Suppose we have just four political parties: Democrats, 
+Republicans, Independents, and Libertarians. Party registration data is 
+public, so we can track what fraction of the voters in each party switch
+ to a different party from one election to the next. Let's say we look 
+up Democratic Party registration data and discover the following: 81% of
+ Democrats remain Democrats, 9% become Republicans, 6% re-register as 
+Independents, and 4% become Libertarians. We can do the same kind of 
+calculation for the other three parties and then organize our data into a
+ table:
+</p>
+
+<table class="data">
+	<tbody><tr>
+		<th class="leftcol"></th>	<th>Democrats</th>	<th>Republicans</th>	<th>Independents</th>	<th>Libertarians</th>
+	</tr>
+	<tr>
+		<th class="leftcol">Democrats</th>	<td>0.81</td>	<td>0.08</td>	<td>0.16</td>	<td>0.10</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Republicans</th>	<td>0.09</td>	<td>0.84</td>	<td>0.05</td>	<td>0.08</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Independents</th>	<td>0.06</td>	<td>0.04</td>	<td>0.74</td>	<td>0.04</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Libertarians</th>	<td>0.04</td>	<td>0.04</td>	<td>0.05</td>	<td>0.78</td>
+	</tr>
+</tbody></table>
+
+<p>In this table, we've put our results in the columns, so the numbers 
+reflect the proportion of voters in that column's political party who 
+switch to the party listed to the left. For example, the entry in the 
+"Republicans" row and the "Independents" column tells us that 5% of 
+Independents become Republicans each electoral cycle. We're going to 
+assume that these numbers do not change from one election to the 
+next—not a very realistic assumption, but good enough for our simple 
+model.</p>
+
+<p>Naturally, we want to use this data to predict the outcomes of future
+ elections and the long-term composition of the electorate. Think of the
+ table above as a matrix, which we will call <b>P</b>. Let <var>D<sub>0</sub></var>, <var>R<sub>0</sub></var>, <var>I<sub>0</sub></var>, and <var>L<sub>0</sub></var>
+ denote the current shares of the electorate held by Democrats, 
+Republicans, Independents, and Libertarians, respectively. In the next 
+election, these numbers will change according to <b>P</b>, as follows:
+</p>
+
+<p class="center">
+	<var>D<sub>1</sub> = 0.81 D<sub>0</sub> + 0.08 R<sub>0</sub> + 0.16 I<sub>0</sub> + 0.10 L<sub>0</sub><br>
+	R<sub>1</sub> = 0.09 D<sub>0</sub> + 0.84 R<sub>0</sub> + 0.05 I<sub>0</sub> + 0.08 L<sub>0</sub><br>
+	I<sub>1</sub> = 0.06 D<sub>0</sub> + 0.04 R<sub>0</sub> + 0.74 I<sub>0</sub> + 0.04 L<sub>0</sub><br>
+	L<sub>1</sub> = 0.04 D<sub>0</sub> + 0.04 R<sub>0</sub> + 0.05 I<sub>0</sub> + 0.78 L<sub>0</sub></var>
+</p>
+
+<p>
+Let <var><b>x</b><sub>n</sub></var> be the vector <var>(D<sub>n</sub>, R<sub>n</sub>, I<sub>n</sub>, L<sub>n</sub>)<sup>T</sup></var>. This vector represents the party distribution after <var>n</var>
+ electoral cycles; the first entry is the portion who are Democrats, the
+ second the portion who are Republicans, and so on. The equations we 
+just wrote out above show us that <var><b>x</b><sub>1</sub> = <b>Px</b><sub>0</sub></var>. In general, <var><b>x</b><sub>n</sub> = <b>P</b><sup>n</sup><b>x</b><sub>0</sub></var>.
+</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="3%20%EF%B8%B1%20Matrix%20Algebra_files/text.png" class="align-right" width="24" height="24">
+<ol type="a">
+	<li>
+		<p>Let's use the results of the 2012 presidential election as our <var><b>x</b><sub>0</sub></var>. Looking up the popular vote totals, we find that our initial distribution vector should be <var>(0.5106, 0.4720, 0.0075, 0.0099)<sup>T</sup></var>. Enter the matrix <b>P</b> and this vector <var><b>x</b><sub>0</sub></var> in MATLAB:
+		
+		</p><pre><samp>&gt;&gt; </samp><code>P = [0.8100 0.0800 0.1600 0.1000;
+0.0900 0.8400 0.0500 0.0800;
+0.0600 0.0400 0.7400 0.0400;
+0.0400 0.0400 0.0500 0.7800]</code>
+
+<samp>&gt;&gt; </samp><code>x0 = [0.5106; 0.4720; 0.0075; 0.0099]</code></pre>
+		
+		<p>According to our model, what should the party distribution vector be after three, six, and ten elections?</p>
+	</li>
+	<li>
+		<p>What about 30, 60, and 100 elections from now? How different are 
+these three results from each other? Summarize what is happening with <var><b>x</b><sub>k</sub></var> as <var>k</var> gets big.</p>
+	</li>
+</ol>
+</div>
+
+<!--<h2>Feedback</h2>
+
+<p>
+This tutorial was overhauled in Fall 2016. In order to continue improving this lab, we need some (required!) feedback from you, the student.
+</p>
+
+<div class="exercise">
+<span class="e-x">: Feedback</span>
+<img alt="Include full-sentence response."
+ src="img/text.png" width="24" height="24" class="align-right">
+<p>
+Please answer the following questions on a <b>separate page</b> at the end of your assignment.
+</p>
+<ul>
+	<li>How long did this assignment take you to complete?</li>
+	<li>Have you had a course besides Math 18 that used MATLAB? If yes, which course?</li>
+	<li>Did you encounter any errors or potential errors while working through this lab?</li>
+	<li>Were there any typos or unclear statements? Please tell us where.</li>
+	<li>Do you have anything else you'd like to say about the lab?</li>
+</ul>
+<p>
+Please be as specific as possible. If you have any suggestions to submit at a later time, you can also email the head MATLAB TA at <a href="mailto:matlabta@math.ucsd.edu">matlabta@math.ucsd.edu</a>.
+</p>
+</div>
+-->
+
+<h2>Conclusion</h2>
+
+<p>
+Hopefully, this lab has given you a little more intuition for the 
+properties of matrices and their differences from real numbers. In the 
+last exercise, you've also made some interesting observations about what
+ happens when we apply the same matrix to a vector over and over again. 
+In the next lab, we'll develop more mathematical tools to help explain 
+this behavior.
+</p>
+
+<hr>
+<i id="mod">Last Modified: 8 January 2017</i>
+
+</div>
+
+
+</div>
+
+
+
+</body></html>
