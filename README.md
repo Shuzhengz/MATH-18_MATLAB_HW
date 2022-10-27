@@ -1,4 +1,4 @@
-# MATH-18_MATLAB_HW
+# MATH 18 MATLAB Homework
 
 My MATLAB homework and solution for UCSD MATH 18 Linear Algebra, Fall 2022
 
