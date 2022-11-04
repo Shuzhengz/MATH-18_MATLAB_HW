@@ -79,3 +79,13 @@ c =
      2
      3
 ```
+
+<br/><br/>
+
+## Exercise 3.2
+
+1. San Diego - Los Angeles - Tokyo - Manila
+2. San Diego - Los Angeles - Shanghai - Manila
+3. San Diego - Seattle - Los Angeles - Manila
+4. San Diego - Seattle - Tokyo - Manila
+5. San Diego - Seattle - Shanghai - Manila
