@@ -126,3 +126,60 @@ But I still think $N^{100}$ is invertible, because the 0 at column 3 of row 3 is
 actually a zero, but instead a number so small that the calculator just sees it as a zero. 
 
 Also, $N$ is invertible, so that would mean that $N^{100}$ is also invertible.
+
+<br/><br/>
+
+## Exercise 4.3
+
+a.
+
+```Matlab
+>> V = [-8 6 -6 -30; 3 9 12 -10; 3 -6 -1 18; 3 0 4 7]
+
+V =
+
+    -8     6    -6   -30
+     3     9    12   -10
+     3    -6    -1    18
+     3     0     4     7
+
+>> [P,D] = eig(V)
+
+P =
+
+   -0.8874    0.8660    0.0605    0.8706
+    0.2662   -0.2887    0.8812    0.0725
+    0.2662   -0.2887   -0.4036   -0.4353
+    0.2662   -0.2887    0.2388   -0.2176
+
+
+D =
+
+    1.0000         0         0         0
+         0    2.0000         0         0
+         0         0    1.0000         0
+         0         0         0    3.0000
+```
+
+<br></br>
+
+b.
+
+$V$ should be invertible, since none of the eigenvalues are zero
+
+<br></br>
+
+c.
+
+```Matlab
+>> x = P^-1 * V * P
+
+x =
+
+    1.0000    0.0000    0.0000    0.0000
+   -0.0000    2.0000   -0.0000    0.0000
+    0.0000   -0.0000    1.0000   -0.0000
+   -0.0000    0.0000    0.0000    3.0000
+```
+
+It seems like the value is equal to $D$
