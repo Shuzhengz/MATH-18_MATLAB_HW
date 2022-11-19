@@ -263,3 +263,136 @@ ans =
 ```
 
 $f_{30}$ is $134269$, the second value of the 29th sequence
+
+<br/><br/>
+
+## Exercise 4.5
+
+a.
+
+```Matlab
+>> P = [0.8100 0.0800 0.1600 0.1000;
+0.0900 0.8400 0.0500 0.0800;
+0.0600 0.0400 0.7400 0.0400;
+0.0400 0.0400 0.0500 0.7800]
+
+P =
+
+    0.8100    0.0800    0.1600    0.1000
+    0.0900    0.8400    0.0500    0.0800
+    0.0600    0.0400    0.7400    0.0400
+    0.0400    0.0400    0.0500    0.7800
+
+>> x0 = [0.5106; 0.4720; 0.0075; 0.0099]
+
+x0 =
+
+    0.5106
+    0.4720
+    0.0075
+    0.0099
+
+>> [Q,D] = eig(P)
+
+Q =
+
+    0.6656    0.7676    0.5432   -0.4641
+    0.6165   -0.2841   -0.8148   -0.1254
+    0.2946   -0.5682    0.1811   -0.2508
+    0.3001    0.0848    0.0905    0.8402
+
+
+D =
+
+    1.0000         0         0         0
+         0    0.6730         0         0
+         0         0    0.7600         0
+         0         0         0    0.7370
+
+>> Q * D * Q^-1
+
+ans =
+
+    0.8100    0.0800    0.1600    0.1000
+    0.0900    0.8400    0.0500    0.0800
+    0.0600    0.0400    0.7400    0.0400
+    0.0400    0.0400    0.0500    0.7800
+```
+
+<br></br>
+
+b.
+
+$L = \begin{bmatrix}1 & 0 & 0 & 0\\0 & 0 & 0 & 0\\0 & 0 & 0 & 0\\0 & 0 & 0 & 0\end{bmatrix}$
+
+<br></br>
+
+c.
+
+```Matlab
+>> L = [1 0 0 0;
+0 0 0 0;
+0 0 0 0;
+0 0 0 0]
+
+L =
+
+     1     0     0     0
+     0     0     0     0
+     0     0     0     0
+     0     0     0     0
+
+>> Pinf = Q * L * Q^-1
+
+Pinf =
+
+    0.3547    0.3547    0.3547    0.3547
+    0.3285    0.3285    0.3285    0.3285
+    0.1570    0.1570    0.1570    0.1570
+    0.1599    0.1599    0.1599    0.1599
+```
+
+<br></br>
+
+d.
+
+```Matlab
+>> Pinf * x0
+
+ans =
+
+    0.3547
+    0.3285
+    0.1570
+    0.1599
+```
+
+The result is the exact same as my answer from the last lab
+
+<br></br>
+
+e.
+```Matlab
+>> y = [0.25; 0.25; 0.25; 0.25]
+
+y =
+
+    0.2500
+    0.2500
+    0.2500
+    0.2500
+
+>> Pinf * y
+
+ans =
+
+    0.3547
+    0.3285
+    0.1570
+    0.1599
+```
+The result is identical to the previous result, so it seems like it doesn't matter what
+the initial $x_{0}$ is, they will all end up the same as $n$ approaches infinity.
+
+I think this is because every column of `Pinf` is identical, so the product between it
+and any vector that adds up to $1$ will be identical to the columns.
