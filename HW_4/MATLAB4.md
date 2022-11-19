@@ -71,6 +71,8 @@ ans =
     48
 ```
 
+<br></br>
+
 b.
 
 I don't think $A+B$ is invertible, because the determinant of the matrix is 0
@@ -182,4 +184,82 @@ x =
    -0.0000    0.0000    0.0000    3.0000
 ```
 
-It seems like the value is equal to $D$
+It seems like the value is approx. equal to $D$
+
+<br/><br/>
+
+## Exercise 4.4
+
+a.
+
+```Matlab
+>> F = [0 1; 1 1]
+
+F =
+
+     0     1
+     1     1
+
+>> [P,D] = eig(F)
+
+P =
+
+   -0.8507    0.5257
+    0.5257    0.8507
+
+
+D =
+
+   -0.6180         0
+         0    1.6180
+
+>> P * D * P^-1
+
+ans =
+
+   -0.0000    1.0000
+    1.0000    1.0000
+```
+
+b.
+
+```Matlab
+>> F^10
+
+ans =
+
+    34    55
+    55    89
+
+>> P * D^10 * P^-1
+
+ans =
+
+   34.0000   55.0000
+   55.0000   89.0000
+```
+
+$F^{10}$ does have the same value as $P D^{10} P^{-1}$
+
+<br></br>
+
+c.
+
+It seems to follow a Fibonacci sequence, where the first value of each matrix equals to 
+the last value of the last matrix, and the second value is the sum of the two values of 
+the previous matrix.
+
+<br></br>
+
+d.
+
+```Matlab
+>> F^29 * f
+
+ans =
+
+      832040
+     1346269
+```
+
+$f_{30}$ is $134269$, the second value of the 29th sequence
