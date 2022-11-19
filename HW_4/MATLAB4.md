@@ -396,3 +396,94 @@ the initial $x_{0}$ is, they will all end up the same as $n$ approaches infinity
 
 I think this is because every column of `Pinf` is identical, so the product between it
 and any vector that adds up to $1$ will be identical to the columns.
+
+<br/><br/>
+
+## Exercise 4.6
+
+a.
+
+```Matlab
+>> L = [0,0,0,0,1,0,0,0;
+0,0,0,0,0,0,0,1;
+0,1/2,0,0,0,0,1,0;
+1/2,0,1/2,0,0,0,0,0;
+0,0,1/2,0,0,1,0,0;
+1/2,0,0,0,0,0,0,0;
+0,1/2,0,0,0,0,0,0;
+0,0,0,1,0,0,0,0;]
+
+L =
+
+         0         0         0         0    1.0000         0         0         0
+         0         0         0         0         0         0         0    1.0000
+         0    0.5000         0         0         0         0    1.0000         0
+    0.5000         0    0.5000         0         0         0         0         0
+         0         0    0.5000         0         0    1.0000         0         0
+    0.5000         0         0         0         0         0         0         0
+         0    0.5000         0         0         0         0         0         0
+         0         0         0    1.0000         0         0         0         0
+
+>> e0 = [1 1 1 1 1 1 1 1]'
+
+e0 =
+
+     1
+     1
+     1
+     1
+     1
+     1
+     1
+     1
+
+>> e10 = L^10 * e0
+
+e10 =
+
+    1.0625
+    1.1250
+    1.1875
+    1.1250
+    1.1719
+    0.5781
+    0.5938
+    1.1562
+```
+
+Eh I will go with n as 30
+
+```Matlab
+>> L^30 * e0
+
+ans =
+
+    1.1449
+    1.1441
+    1.1423
+    1.1422
+    1.1424
+    0.5706
+    0.5713
+    1.1423
+
+>> L^31 * e0
+
+ans =
+
+    1.1424
+    1.1423
+    1.1433
+    1.1436
+    1.1417
+    0.5725
+    0.5721
+    1.1422
+```
+
+<br></br>
+
+b.
+
+D and E have an edge going out pointing towards website C, 
+and edges coming out of C points towards B and E
