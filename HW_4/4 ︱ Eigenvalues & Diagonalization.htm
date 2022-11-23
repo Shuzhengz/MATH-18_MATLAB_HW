@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+	<title>4 ︱ Eigenvalues &amp; Diagonalization</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Math 18 MATLAB Assignment 4">
+	<link rel="stylesheet" href="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/styles.css">
+</head>
+
+<body style="counter-reset:section 3">
+<div class="content">
+
+<div class="menu">
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html">Main</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html">FAQ</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html#quiztimes">Quiz Times</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/tutorhours.html">Tutor
+Hours</a>
+</p>
+
+</div>
+
+<div class="main">
+
+<h1>Eigenvalues &amp; Diagonalization</h1>
+
+<hr>
+
+<p>In this lab, we're going to learn how to use MATLAB to compute the 
+eigenvalues, eigenvectors, and determinants of matrices. Then we'll use 
+these new mathematical tools to revisit old problems from a new 
+perspective.</p>
+
+<h2>Determinants</h2>
+
+<p>
+As you should be aware by now, there is a nice formula for calculating 
+the determinant of a 2×2 matrix. Even the 3×3 case is not too hard. But 
+as the size of a matrix increases, the determinant calculation gets much
+ more complicated. This is where MATLAB comes in.
+</p>
+
+<p>
+Start by entering the following two matrices in MATLAB:
+</p>
+
+<img class="center" style="border: 0px solid ; width: 434px; height: 119px;" alt="" src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/twomatrices.gif">
+
+<p>To compute the determinants of these matrices, we use the command <code>det()</code>:
+
+</p><pre><samp>&gt;&gt; </samp><code>det(A)</code>
+
+<samp>ans =
+    76</samp>
+
+<samp>&gt;&gt; </samp><code>det(B)</code>
+
+<samp>ans =
+    48</samp></pre>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/text.png" class="align-right" width="24" height="24">
+<ol type="a">
+	<li>
+		<p>Use MATLAB to compute the determinants of the matrices <b>A</b>+<b>B</b>, <b>A</b>-<b>B</b>, <b>AB</b>, <b>A</b><sup>-1</sup>, and <b>B</b><sup>T</sup>. (Recall that in MATLAB, <b>B</b><sup>T</sup> is written as <code>B'</code>.)</p>
+	</li>
+	<li>
+		<p>Which of the above matrices are <i>not</i> invertible? Explain your reasoning.</p>
+	</li>
+	<li>
+		Suppose that you didn't know the entries of <b>A</b> and <b>B</b>, but
+ you did know their determinants. Which of the above determinants would 
+you still be able to compute from this information, even without having <b>A</b> or <b>B</b> at hand? Explain your reasoning.
+	</li>
+</ol>
+</div>
+
+<p><span class="e-n"></span> In this class, we're interested in 
+determinants mainly as a way to study the invertibility of matrices. 
+When we use MATLAB for this purpose, we must be careful. Any computer 
+program will introduce rounding errors, so a matrix that actually is 
+invertible may appear to have zero determinant.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Do work by hand." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/pencil.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/text.png" class="align-right" width="24" height="24">
+
+<p>Enter the following matrix in MATLAB:</p>
+
+<img class="center" style="border: 0px solid ; width: 461px; height: 169px;" alt="" src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/20d-4-2.png">
+ 
+<p>Use <code>det()</code> to calculate the determinant of <b>N</b><sup>100</sup>. Based on this information, do you think that <b>N</b><sup>100</sup> is invertible?</p>
+
+<p>Now compute the determinant of <b>N</b>. Calculate the determinant of <b>N</b><sup>100</sup> by hand. Now would you reconsider your answer to the previous question? Explain.</p>
+</div>
+
+<p>What we've just seen in this exercise is an example of the sort of rounding error that computers can introduce.</p>
+
+<h2>Eigenvalues and Eigenvectors</h2>
+
+<p>As you may have already learned in class, an <i>eigenvalue</i> of a matrix <b>A</b> is a number <var>λ</var> such that the equation <var><b>Av</b> = λ<b>v</b></var> has solutions other than the zero vector. Such a vector <b>v</b> is called an <i>eigenvector</i> corresponding to the eigenvalue <var>λ</var>.
+ Generally, it's rather unpleasant to compute these eigenvalue and 
+eigenvectors for a matrix by hand. Luckily, the MATLAB command <code>eig()</code> can perform this task for us.</p>
+
+<div class="example">
+<span class="e-g"></span>
+
+<p>Suppose we'd like to compute the eigenvalues of the matrix <b>B</b> we used earlier, and we want to store the eigenvalues in a vector <b>b</b>. We can do this using the following command:</p>
+
+<pre><samp>&gt;&gt; </samp><code>b = eig(B)</code>
+
+<samp>b =
+    1
+    8
+    3
+    2</samp></pre>
+ 
+<p>Thus we see that the eigenvalues are 1, 8, 3, and 2; there are four 
+eigenvalues because our matrix is 4×4. (As an aside, note that we can 
+quickly compute the determinant of <b>B</b> with this information: it's just the product of the eigenvalues.)</p>
+
+<p>If we want to compute the eigenvalues and corresponding eigenvectors all in one step, we can simply use the following command:</p>
+
+<pre><samp>&gt;&gt; </samp><code>[P,D] = eig(B)</code>
+
+<samp>P =
+
+    1.0000   -0.1980   0.2357    0.9074
+    0         0.6931  -0.2357   -0.1815
+    0         0.6931   0.9428    0.3630
+    0         0        0         0.1089
+
+
+D =
+
+    1 0 0 0
+    0 8 0 0
+    0 0 3 0
+    0 0 0 2</samp></pre>
+
+<p>The matrix <b>P</b> here has the eigenvectors of <b>B</b> as its columns, and the diagonal matrix <b>D</b> has the corresponding eigenvectors along the diagonal. This means, for instance, that the second column of <b>P</b> is an eigenvector for the eigenvalue 8, which is the second entry along the diagonal of <b>D</b>.</p>
+
+<p>Let's quickly check this result. Enter the following command:</p>
+
+<samp>&gt;&gt; </samp><code>x = P(:,2);</code>
+
+<p>This will store the second column of <b>P</b> as a new vector that we're calling <b>x</b>. Now enter</p>
+
+<samp>&gt;&gt; </samp><code>B*x - 8*x</code>
+
+<p>If we've done everything correctly, we should get <b>0</b>, since <b>x</b> is supposed satisfy the equation <b>Bx</b> = 8<b>x</b>.</p>
+</div>
+
+<p>Now let's explore one of the interesting properties of these eigenvalue and eigenvector matrices.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/text.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>Enter the following matrix in MATLAB:</p>
+
+			<pre><samp>&gt;&gt; </samp><code> V = [-8 6 -6 -30; 3 9 12 -10; 3 -6 -1 18; 3 0 4 7]			
+</code></pre>
+			<!-- V = [5 -2 -2 0;
+-51 30 -26 39;
+-14 -10 6 -10;
+34 -31 25 -48] -->
+			<!--OLD MATRIX
+			<pre><samp>&gt;&gt; </samp><code>V = [7 -2 -1 0;
+-51 35 -26 42;
+-14 -14 6 -14;
+38 -31 25 -48]</code></pre>
+			-->
+
+		<p>Now use MATLAB to find the eigenvectors and corresponding eigenvalues of <b>V</b>. Assign them to matrices <b>P</b> and <b>D</b>, respectively.
+	</p></li>
+	<li>
+		Determine whether <b>V</b> is invertible by looking at the eigenvalues. Explain your reasoning.
+	</li>
+	<li>
+		Use MATLAB to evaluate <b>P</b><sup>-1</sup><b>VP</b>. What do you notice?
+	</li>
+</ol>
+</div>
+
+<h2>Diagonalization</h2>
+
+<p>We've just seen an example of an important phenomenon called <i>diagonalizability</i>. We say that a matrix <b>A</b> is diagonalizable when we can find an invertible matrix <b>P</b> such that <b>P</b><sup>-1</sup><b>AP</b> is diagonal. But this idea seems really arbitrary: why would anyone want to modify the matrix <b>A</b> like this just to make it diagonal?</p>
+
+<p>To answer this question, let's think about the problem of raising <b>A</b>
+ to a large power—100, say. This kind of computation is definitely 
+useful; in a lot of real-world applications, you're interested in what 
+happens when some process (represented mathematically by the matrix 
+multiplication) is applied to some initial conditions (stored in a 
+vector) over and over again. We could of course just multiply <b>A</b> by itself 100 times, but that makes for a <i>lot</i> of operations, even for a computer. It will take a long time, especially if <b>A</b> is large. However, diagonalization offers us a neat shortcut. If we could write <b>A</b> as <b>PDP</b><sup>-1</sup>, where <b>D</b> is a diagonal matrix, then we can do this:</p>
+
+<p class="center" style="font-size:0.9em"><b>A</b><sup>100</sup> = (<b>PDP</b><sup>-1</sup>)<sup>100</sup> = (<b>PDP</b><sup>-1</sup>)(<b>PDP</b><sup>-1</sup>)⋯(<b>PDP</b><sup>-1</sup>) = <b>PD</b>(<b>P</b><sup>-1</sup><b>P</b>)<b>D</b>(<b>P</b><sup>-1</sup><b>P</b>)⋯(<b>P</b><sup>-1</sup><b>P</b>)<b>DP</b><sup>-1</sup> = <b>PD</b><sup>100</sup><b>P</b><sup>-1</sup>.</p>
+
+<p><b>D</b><sup>100</sup> is much nicer than <b>A</b><sup>100</sup> 
+because in order to raise a diagonal matrix to a power, all you have to 
+do is raise all of its entries to that power. This requires far fewer 
+matrix multiplications.</p>
+
+<p>Not every matrix is diagonalizable. In order to diagonalize an <var>n×n</var> matrix, we need to find <var>n</var> eigenvectors of that matrix that form a basis of <b>R</b><sup>n</sup>. These <var>n</var> linearly independent eigenvectors form the columns of <b>P</b>, and then the entries of <b>D</b> are the matching eigenvalues. If we can't find a basis consisting only of eigenvectors, then the matrix isn't diagonalizable.</p>
+
+<p><span class="e-n_style">Theorem:</span> If an <var>n×n</var> matrix has <var>n</var> distinct eigenvalues, then the matrix is diagonalizable.</p>
+
+<p>Note that the converse is not true: some matrices are diagonalizable 
+even though they don't have distinct eigenvalues. One example is the 
+identity matrix, which is already diagonal and whose eigenvalues are all
+ 1.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/text.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>Enter this matrix in MATLAB:</p>
+
+			<samp>&gt;&gt; </samp><code>F = [0 1; 1 1]</code>
+
+		<p>Use MATLAB to find an invertible matrix <b>P</b> and a diagonal matrix <b>D</b> such that <b>PDP</b><sup>-1</sup> = <b>F</b>.</p>
+	</li>
+	<li>
+		<p>Use MATLAB to compare <b>F</b><sup>10</sup> and <b>PD</b><sup>10</sup><b>P</b><sup>-1</sup>.</p>
+	</li>
+	<li>
+		<p>Let <b>f</b> = (1, 1)<sup>T</sup>. Compute <b>Ff</b>, <b>F</b><sup>2</sup><b>f</b>, <b>F</b><sup>3</sup><b>f</b>, <b>F</b><sup>4</sup><b>f</b>, and <b>F</b><sup>5</sup><b>f</b>. (You don't need to include the input and output for these.) Describe the pattern in your answers.</p>
+	</li>
+	<li>
+		<p>Consider the Fibonacci sequence {<var>f<sub>n</sub></var>} = {1, 1, 2, 3, 5, 8, 13…}, where each term is formed by taking the sum of the previous two. If we start with a vector <b>f</b> = (<var>f<sub>0</sub></var>, <var>f<sub>1</sub></var>)<sup>T</sup>, then <b>Ff</b> = (<var>f<sub>1</sub></var>, <var>f<sub>0</sub></var> + <var>f<sub>1</sub></var>)<sup>T</sup> = (<var>f<sub>1</sub></var>, <var>f<sub>2</sub></var>)<sup>T</sup>, and in general <b>F</b><sup><var>n</var></sup><b>f</b> =  (<var>f<sub>n</sub></var>, <var>f<sub>n+1</sub></var>)<sup>T</sup>. Here, we're setting both <var>f<sub>0</sub></var> and <var>f<sub>1</sub></var> equal to 1. Given this, compute <var>f<sub>30</sub></var>.</p>
+	</li>
+</ol>
+</div>
+
+<p>The Fibonacci sequence we just saw is defined recursively: each term 
+is given by a formula involving previous terms. By computing <b>F</b><sup><var>n</var> </sup> (which is done by computing <b>PD</b><sup><var>n</var></sup><b>P</b><sup>-1</sup>), we can actually derive an <i>explicit</i> formula for each term that doesn't require you to already know previous terms.</p>
+
+<h2>Electoral Trends Revisited</h2>
+
+At the end of the last lab, we said we would revisit our election 
+example once we had some more tools to work with. For your convenience, 
+we've reprinted the information related to that example below:
+
+<div class="inset">
+<p>
+In California, when you register to vote, you declare a party 
+affiliation. Suppose we have just four political parties: Democrats, 
+Republicans, Independents, and Libertarians. Party registration data is 
+public, so we can track what fraction of the voters in each party switch
+ to a different party from one election to the next. Let's say we look 
+up Democratic Party registration data and discover the following: 81% of
+ Democrats remain Democrats, 9% become Republicans, 6% re-register as 
+Independents, and 4% become Libertarians. We can do the same kind of 
+calculation for the other three parties and then organize our data into a
+ table:
+</p>
+
+<table class="data">
+	<tbody><tr>
+		<th class="leftcol"></th>	<th>Democrats</th>	<th>Republicans</th>	<th>Independents</th>	<th>Libertarians</th>
+	</tr>
+	<tr>
+		<th class="leftcol">Democrats</th>	<td>0.81</td>	<td>0.08</td>	<td>0.16</td>	<td>0.10</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Republicans</th>	<td>0.09</td>	<td>0.84</td>	<td>0.05</td>	<td>0.08</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Independents</th>	<td>0.06</td>	<td>0.04</td>	<td>0.74</td>	<td>0.04</td>
+	</tr>
+	<tr>
+		<th class="leftcol">Libertarians</th>	<td>0.04</td>	<td>0.04</td>	<td>0.05</td>	<td>0.78</td>
+	</tr>
+</tbody></table>
+
+<p>In this table, we've put our results in the columns, so the numbers 
+reflect the proportion of voters in that column's political party who 
+switch to the party listed to the left. For example, the entry in the 
+"Republicans" row and the "Independents" column tells us that 5% of 
+Independents become Republicans each electoral cycle. We're going to 
+assume that these numbers do not change from one election to the 
+next—not a very realistic assumption, but good enough for our simple 
+model.</p>
+
+<p>Naturally, we want to use this data to predict the outcomes of future
+ elections and the long-term composition of the electorate. Think of the
+ table above as a matrix, which we will call <b>P</b>. Let <var>D<sub>0</sub></var>, <var>R<sub>0</sub></var>, <var>I<sub>0</sub></var>, and <var>L<sub>0</sub></var>
+ denote the current shares of the electorate held by Democrats, 
+Republicans, Independents, and Libertarians, respectively. In the next 
+election, these numbers will change according to <b>P</b>, as follows:
+</p>
+
+<p class="center">
+	<var>D<sub>1</sub> = 0.81 D<sub>0</sub> + 0.08 R<sub>0</sub> + 0.16 I<sub>0</sub> + 0.10 L<sub>0</sub><br>
+	R<sub>1</sub> = 0.09 D<sub>0</sub> + 0.84 R<sub>0</sub> + 0.05 I<sub>0</sub> + 0.08 L<sub>0</sub><br>
+	I<sub>1</sub> = 0.06 D<sub>0</sub> + 0.04 R<sub>0</sub> + 0.74 I<sub>0</sub> + 0.04 L<sub>0</sub><br>
+	L<sub>1</sub> = 0.04 D<sub>0</sub> + 0.04 R<sub>0</sub> + 0.05 I<sub>0</sub> + 0.78 L<sub>0</sub></var>
+</p>
+
+<p>
+Let <var><b>x</b><sub>n</sub></var> be the vector <var>(D<sub>n</sub>, R<sub>n</sub>, I<sub>n</sub>, L<sub>n</sub>)<sup>T</sup></var>. This vector represents the party distribution after <var>n</var>
+ electoral cycles; the first entry is the portion who are Democrats, the
+ second the portion who are Republicans, and so on. The equations we 
+just wrote out above show us that <var><b>x</b><sub>1</sub> = <b>Px</b><sub>0</sub></var>. In general, <var><b>x</b><sub>n</sub> = <b>P</b><sup>n</sup><b>x</b><sub>0</sub></var>.
+</p>
+</div>
+
+<p>You're going to need the matrix <b>P</b> and initial distribution vector <b>x</b><sub>0</sub> from the exercise we did:</p>
+
+<pre><samp>&gt;&gt; </samp><code>P = [0.8100 0.0800 0.1600 0.1000;
+0.0900 0.8400 0.0500 0.0800;
+0.0600 0.0400 0.7400 0.0400;
+0.0400 0.0400 0.0500 0.7800]</code>
+
+<samp>&gt;&gt; </samp><code>x0 = [0.5106; 0.4720; 0.0075; 0.0099]</code></pre>
+
+<p>You'll also need your results from that exercise, so go ahead and 
+redo it if you don't have your answers handy. (You don't need to include
+ them in your write-up this time, however.) Your results probably seemed
+ to stabilize as we went further into the future. Let's try to explain 
+that mathematically.</p>
+
+<p>
+For this exercise, we'll need to introduce the concept of <i>limits</i>.
+ Many of you will have already seen limits in pre-calculus or calculus 
+classes. A rough intuitive definition of limit is this: a limit is a 
+number that a function "approaches" when the numbers you plug in to that
+ function get close to a certain value. So if we say, "The limit of the 
+function <var>f(x)</var> when <var>x</var> approaches 2 is 5," that means we can make <var>f(x)</var> as close as we like to the value 5 by choosing values for <var>x</var> that are closer and closer to 2.
+</p>
+
+<p>You can also speak of limits of sequences of numbers: if we have a sequence <var>{a<sub>n</sub>}</var>, to say that the limit of this sequence is <var>L</var> is to say that however close you ask me to get to <var>L</var>, I can find a term in the sequence so that all the subsequent terms are that close to <var>L</var>. Formally, the criterion is that for every positive number <var>ε</var> (no matter how small), there is an index <var>N</var> such that for each term <var>x<sub>n</sub></var> after <var>x<sub>N</sub></var>, the difference between <var>L</var> and <var>x<sub>n</sub></var> is less than <var>ε</var>.</p>
+
+<p>Some sequences are easy to compute limits for. For example, consider the geometric sequence <var>{r, r<sup>2</sup>, r<sup>3</sup>, r<sup>4</sup>, …}</var>. We can see what happens simply by checking how big <var>r</var> is. If <var>|r| &lt; 1</var>, then the terms get smaller and smaller and eventually approach 0. If <var>r = 1</var>, then the sequence just stays at 1 forever. And if <var>r &gt; 1</var>, the terms grow larger and larger, and we say that the limit is infinity.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/text.png" class="align-right" width="24" height="24">
+<img alt="Do work by hand." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/pencil.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>Use MATLAB to find a matrix <b>Q</b> and a diagonal matrix <b>D</b> such that <b>P</b> = <b>QDQ</b><sup>-1</sup>.</p>
+	</li>
+	<li>
+		<p>Now recall that <b>P</b><sup><var>n</var></sup> = <b>QD</b><sup><var>n</var></sup><b>Q</b><sup>-1</sup>. Find the limit as <var>n</var> tends to infinity of <b>D</b><sup><var>n</var></sup> by hand; we'll call the resulting matrix <b>L</b>.</p>
+	</li>
+	<li>
+		<p>Using MATLAB, multiply <b>L</b> by <b>Q</b> and <b>Q</b><sup>-1</sup> (on the appropriate sides) to compute <b>P</b><sub>∞</sub>, the limit as <var>n</var> tends to infinity of <b>P</b><sup><var>n</var></sup>. Store the answer in a variable called <code>Pinf</code>.</p>
+	</li>
+	<li>
+		<p>Now use MATLAB to compute <b>P</b><sub>∞</sub><b>x</b><sub>0</sub>. How does your answer compare to the results you saw in the second part of the exercise from last lab?</p>
+	</li>
+	<li>
+		<p>Make up any vector <b>y</b> in <b>R</b><sup>4</sup> whose entries add up to 1. Compute <b>P</b><sub>∞</sub><b>y</b>, and compare your result to <b>P</b><sub>∞</sub><b>x</b><sub>0</sub>. How does the initial distribution vector <b>y</b> of the electorate seem to affect the distribution in the long term? By looking at the matrix <b>P</b><sub>∞</sub>, give a mathematical explanation.</p>
+	</li>
+</ol>
+</div>
+
+<h2>PageRank Revisited</h2>
+
+<p>Back in Lab 2, we discussed Google's PageRank algorithm for ranking 
+websites using linking information stored in a linking matrix <b>L</b>. 
+The version of the algorithm we presented worked well for our simple 
+examples, but it turns out that Google doesn't solve the problem using 
+the methods we implemented—our original method is too slow to handle 
+extremely large linking matrices.</p>
+
+<p>We want to find a quick way to solve the equation <b>Lr</b> = <b>r</b> even when the dimension of the linking matrix <b>L</b> is very large (and we expect <b>L</b> to be large because the web is huge). One thing we have going for us is that almost all the entries of <b>L</b>
+ are going to be 0, since most websites don't link to most other 
+websites. Our favorite technique for solving linear systems, Gaussian 
+elimination, will mess this up: after only a few steps, a lot of the 
+zero entries will be replaced with nonzero numbers. So we'd prefer to 
+try something else. Here, we'll use a more elaborate version of the 
+theorem we relied on before.</p>
+
+<p><span class="e-n_style">Theorem (Perron–Frobenius):</span> For any matrix <var><b>L</b></var> whose entries are all nonnegative and whose columns each sum to one, the largest eigenvalue is 1. Moreover, for any vector <b>r</b><sub>0</sub> with positive entries, the vector <b>r</b><sub><var>n</var></sub> = <b>L</b><sup><var>n</var></sup><b>r</b><sub>0</sub> approaches a nonnegative vector <b>r</b> that is a solution to the eigenvalue problem <b>Lr</b> = <b>r</b>.</p>
+
+<p>Now we've recast the phenomenon behind PageRank as one involving eigenvalues, eigenvectors, and iteration of the matrix <b>L</b> (i.e., raising <b>L</b> to large powers). Specifically, if we take <var>n</var> to be large enough, then <b>L</b><sup><var>n</var></sup><b>r</b><sub>0</sub> will approach the solution we're looking for.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/text.png" class="align-right" width="24" height="24">
+<!-- <img alt="Do work by hand."
+ src="img/pencil.png" width="24" height="24" class="align-right"> -->
+
+<p>Consider the following linking matrix showing connections between the websites A, B, C, D, E, F, G, and H:</p>
+
+<img class="center" style="border: 0px solid ; width: 230px; height: 309px;" alt="" src="4%20%EF%B8%B1%20Eigenvalues%20&amp;%20Diagonalization_files/BigPageRank.gif">
+
+<p>Enter this matrix into MATLAB with the command</p>
+
+<pre><samp>&gt;&gt; </samp><code>L = [0,0,0,0,1,0,0,0;
+0,0,0,0,0,0,0,1;
+0,1/2,0,0,0,0,1,0;
+1/2,0,1/2,0,0,0,0,0;
+0,0,1/2,0,0,1,0,0;
+1/2,0,0,0,0,0,0,0;
+0,1/2,0,0,0,0,0,0;
+0,0,0,1,0,0,0,0;]</code></pre>
+
+<ol type="a">
+	<li>
+		<p>Let <b>e</b><sub>0</sub> = (1, 1, 1, 1, 1, 1, 1, 1)<sup>T</sup>, and define <b>e</b><sub><var>n+1</var></sub> = <b>L</b><b>e</b><sub><var>n</var></sub> (which is the same as saying <b>e</b><sub><var>n</var></sub> = <b>L</b><sup><var>n</var></sup><b>e</b><sub>0</sub>). Use MATLAB to compute <b>e</b><sub>10</sub>. How large must <var>n</var> be so that each entry of <b>e</b><sub><var>n</var></sub> changes by less than 1% when we increase <var>n</var> by 1? [Don't try to get an exact value, just try to get a value for <var>n</var> that's big enough.]</p>
+	</li>
+	<li>
+		In the graph of the network of webpages represented by <b>L</b>, which
+ vertices have an edge going out and pointing toward website C? Which 
+vertices do the edges coming out of C point to? (Here, by <i>graph</i> we mean a <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">collection of vertices and edges</a>.)
+	</li>
+</ol>
+</div>
+
+<p>If you find this PageRank algorithm interesting, you might try to 
+answer the following question: what is the computation cost of solving <b>Lr</b> = <b>r</b> using iteration? More precisely, about how many operations are required to find <b>r</b><sub><var>n</var></sub>
+ in this method? Multiplying a number by 0 and adding two numbers 
+together each cost almost no time, so we just need to count how many 
+times we have to multiply two nonzero numbers together.</p>
+
+<p>What usually happens in practice for very large <b>L</b> is that the convergence of <b>r</b><sub><var>n</var></sub> to <b>r</b> is very quick, and so the size of <var>n</var> needed for decent accuracy often doesn't go up rapidly with the dimensions of <b>L</b>. This is very important because the dimensions of <b>L</b>
+ for real websites will be on the order of hundreds of millions. 
+Convergence is especially quick if our initial guess at the answer is 
+good.</p>
+
+<p>The type of iteration we've just seen is the basic idea behind 
+solving many large-scale problems, not just PageRank. Methods like 
+Gaussian elimination implemented in MATLAB are very reliable for 
+matrices of modest size, but they take a long time when there are more 
+than a few hundred variables. Iterative methods work well on large 
+matrices with high probability, but they're not completely reliable—some
+ matrices will mess them up.</p>
+
+<!--<h2>Feedback</h2>
+
+<p>
+This tutorial was overhauled in Fall 2016. In order to continue improving this lab, we need some (required!) feedback from you, the student.
+</p>
+
+<div class="exercise">
+<span class="e-x">: Feedback</span>
+<img alt="Include full-sentence response."
+ src="img/text.png" width="24" height="24" class="align-right">
+<p>
+Please answer the following questions on a <b>separate page</b> at the end of your assignment.
+</p>
+<ul>
+	<li>How long did this assignment take you to complete?</li>
+	<li>Have you had a course besides Math 18 that used MATLAB? If yes, which course?</li>
+	<li>Did you encounter any errors or potential errors while working through this lab?</li>
+	<li>Were there any typos or unclear statements? Please tell us where.</li>
+	<li>Do you have anything else you'd like to say about the lab?</li>
+</ul>
+<p>
+Please be as specific as possible. If you have any suggestions to submit at a later time, you can also email the head MATLAB TA at <a href="mailto:matlabta@math.ucsd.edu">matlabta@math.ucsd.edu</a>.
+</p>
+</div>
+-->
+
+<h2>Conclusion</h2>
+
+<p>
+We've now learned how to use MATLAB to compute determinants, 
+eigenvalues, and eigenvectors, and we've used these tools to diagonalize
+ matrices. We've also studied how these things can be applied to study 
+fairly complex models using iteration.</p>
+
+
+<hr>
+<i id="mod">Last Modified: August 2021</i>
+
+</div>
+
+
+</div>
+
+
+
+</body></html>
