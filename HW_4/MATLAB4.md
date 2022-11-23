@@ -372,6 +372,7 @@ The result is the exact same as my answer from the last lab
 <br></br>
 
 e.
+
 ```Matlab
 >> y = [0.25; 0.25; 0.25; 0.25]
 
