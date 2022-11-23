@@ -1,5 +1,6 @@
 # MATLAB HW 2
 
+Warining: apparently I got a 16/20 for this hw for some reason (the instructor didn't say why) so yeah double check your work
 
 ## Exercise 2.1
 
