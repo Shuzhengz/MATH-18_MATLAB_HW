@@ -1,0 +1,3 @@
+# Ignores the webpage in lanuage stats
+*.css linguist-documentation
+*.html linguist-documentation
