@@ -118,3 +118,81 @@ W =
     0.1474         0   -0.9891
    -0.4423    0.8944   -0.0659
 ```
+
+<br/><br/>
+
+## Exercise 5.2
+
+a.
+
+```Matlab
+>> W'*W
+
+ans =
+
+    1.0000         0         0
+         0    1.0000         0
+         0         0    1.0000
+```
+This is a $3 \times 3$ identity matrix, and we should expect this result because we just took the dot product of two orthogonal matrixes with each vector being a unit vector
+
+<br/><br/>
+
+b.
+
+```Matlab
+>> norm(b)
+
+ans =
+
+    3.6056
+
+>> norm(W*b)
+
+ans =
+
+    3.6056
+```
+
+Multiplying b and W when computing the norm does not affect the result because the 
+normalization of W is 1
+
+```Matlab
+>> dot(a,b)
+
+ans =
+
+     2
+
+>> dot(W*a, W*b)
+
+ans =
+
+     2
+```
+
+The same can be seen for these two
+
+<br></br>
+
+c.
+
+```Matlab
+>> invW = inv(W)
+
+invW =
+
+    0.8847    0.1474   -0.4423
+    0.4472         0    0.8944
+    0.1319   -0.9891   -0.0659
+
+>> WT = W'
+
+WT =
+
+    0.8847    0.1474   -0.4423
+    0.4472         0    0.8944
+    0.1319   -0.9891   -0.0659
+```
+
+They are identical
