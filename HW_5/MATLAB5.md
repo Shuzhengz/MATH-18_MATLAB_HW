@@ -5,6 +5,11 @@
 
 a.
 
+
+The maximum number of non-zero orthogonal vectors possible in $\mathbb{R}^{3}$ is 3, since there are only 3 dimensions.
+
+For $\mathbb{R}^{n}$ there can be $n$ non-zero orthogonal vectors, since to have a higher count of orthogonal vecors, you need to add more dimensions into each vector
+
 ```Matlab
 >> v = [2; 0; -1]
 
@@ -79,10 +84,6 @@ ans =
 ```
 
 Those are all the orthogonal sets, producing {$v, y$}, {$w, x$}, and {$x, y, z$}
-
-The maximum number of non-zero orthogonal vectors possible in $\mathbb{R}^{3}$ is 3, since there are only 3 dimensions.
-
-For $\mathbb{R}^{n}$ there can be $n$ non-zero orthogonal vectors, since to have a higher count of orthogonal vecors, you need to add more dimensions into each vector
 
 b.
 
@@ -245,4 +246,5 @@ ans =
   -2.7756e-17
 ```
 
-The number is so small that it can be seen as zero, due to the tiny amount of error Matlab has, so therefore they are orthogonal
+The number is so small that it can be seen as zero, due to the tiny amount of error 
+Matlab has, so therefore they are orthogonal
