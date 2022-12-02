@@ -196,3 +196,53 @@ WT =
 ```
 
 They are identical
+
+<br/><br/>
+
+## Exercise 5.3
+
+<img src="https://mathweb.ucsd.edu/~math18m/Lab5-Files/projection.gif"
+     alt="Projection picture"
+     style="text-align:center; margin-left: 100px;" />
+
+a.
+
+```Matlab
+>> v = [2; 0; -1];
+>> w = [1; 3; 3];
+>> vbar = (dot(v, w)/dot(w, w))*w
+
+vbar =
+
+   -0.0526
+   -0.1579
+   -0.1579
+
+>> z = v - vbar
+
+z =
+
+    2.0526
+    0.1579
+   -0.8421
+
+>> vbar + z
+
+ans =
+
+     2
+     0
+    -1
+```
+
+b.
+
+```Matlab
+>> dot(vbar, z)
+
+ans =
+
+  -2.7756e-17
+```
+
+The number is so small that it can be seen as zero, due to the tiny amount of error Matlab has, so therefore they are orthogonal
