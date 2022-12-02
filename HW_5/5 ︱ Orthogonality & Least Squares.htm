@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en-US"><head>
+	<title>5 ︱ Orthogonality &amp; Least Squares</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="description" content="Math 20D MATLAB Assignment 5">
+	<link rel="stylesheet" href="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/styles.css">
+</head>
+
+<body style="counter-reset:section 4">
+<div class="content">
+
+<div class="menu">
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html">Main</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/MatlabFAQ.html">FAQ</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/index.html#quiztimes">Quiz Times</a>
+</p>
+
+<p>
+<a href="https://mathweb.ucsd.edu/~math18m/tutorhours.html">Tutor
+Hours</a>
+</p>
+
+</div>
+
+<div class="main">
+
+<h1>Orthogonality &amp; Least Squares</h1>
+
+<hr>
+
+<p>A basis for a vector space is a fine thing to have, but in this lab 
+we're going to go a step further and convert bases into orthonormal 
+bases. A basis where the vectors are orthonormal to each other lends 
+itself nicely to various computations, such as finding vector 
+coordinates with respect to the basis and projecting vectors onto 
+various subspaces. Square matrices whose columns are orthonormal (called
+ orthogonal matrices) extend this idea and have a lot of nice 
+properties, some of which we'll explore in this lab.</p>
+
+<p>When we have a bunch of experimental data, we often want to find a 
+function that gives a good approximation of our data in order to build a
+ model. Orthonormal bases will help us find these approximations using 
+the method of least squares.</p>
+
+<h2>Orthogonality</h2>
+
+<p>We say that two vectors <b>x</b> and <b>y</b> are <i>orthogonal</i> when their inner product is zero, i.e.,</p>
+
+<p class="center">⟨<b>x</b>, <b>y</b>⟩ = <b>x ∙ y</b> = <b>x</b><sup>T</sup><b>y</b> = 0.</p>
+
+<p>To compute inner products with MATLAB, you could enter</p>
+
+<samp>&gt;&gt; </samp><code>x'*y</code>
+
+<p>Alternatively, use can use the command <code>dot()</code>:</p>
+
+<samp>&gt;&gt; </samp><code>dot(x,y)</code>
+
+<p>The name <code>dot</code> refers to "dot product," another name for the inner product of vectors.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/text.png" class="align-right" width="24" height="24">
+
+<p>Enter the following vectors into MATLAB.</p>
+
+<img class="center" style="border: 0px solid ; width: 482px; height: 88px;" alt="" src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/vectors.gif">
+
+<ol type="a">
+	<li>
+		<p>List all maximal orthogonal subsets of the above set. That is, group the vectors <b>v</b>, <b>w</b>, <b>x</b>, <b>y</b>, and <b>z</b>
+ in as many ways as possible so that all the vectors in your group are 
+orthogonal to each other and none of the vectors outside the group are 
+orthogonal to all the vectors in the group. For example, the set {<b>w</b>, <b>x</b>}
+ contains two vectors that are orthogonal to each other, and none of the
+ other vectors are orthogonal to both of these at the same time. But 
+this is only one example; there are more.</p>
+		
+		<p>What is the maximum number of nonzero orthogonal vectors that you could possibly find in <b>R</b><sup>3</sup>? What about <b>R</b><sup><var>n</var></sup>? Explain.</p>
+	</li>
+	<li>
+		<p>Take the largest orthogonal subset and normalize all the vectors in that set as follows:</p>
+		
+		<samp>&gt;&gt; </samp><code>v = v/norm(v)</code>
+		
+		<p>This code replaces <code>v</code> with itself divided by its size—so we get a vector pointing in the same direction but with length 1. The above code normalizes <b>v</b>, so you'll have to normalize the other vectors in your orthogonal subset as well, replacing <code>v</code> with the appropriate letter.</p>
+		
+		<p>Store the resulting vectors in MATLAB as columns of a matrix <b>W</b>. Enter them in alphabetical order from left to right.</p>
+	</li>
+</ol>
+</div>
+
+<p>The matrix <b>W</b> we just computed is an <i>orthogonal matrix</i>: it is square, and its columns form an orthonormal set.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/text.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>Calculate <b>W</b><sup>T</sup><b>W</b>. What do you get? Why should we expect this result?</p>
+	</li>
+	<li>
+		<p>Enter the following vectors into MATLAB:</p>
+		
+		<img class="center" style="border: 0px solid ; width: 170px; height: 92px;" alt="" src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/vectors2.gif">
+ 		
+ 		<p>Compute the norm of <b>b</b> and the norm of <b>Wb</b>. What do you notice? Also compute the dot products ⟨<b>a</b>, <b>b</b>⟩ and ⟨<b>Wa</b>, <b>Wb</b>⟩.</p>
+ 		
+ 		<p>One of the fundamental properties of orthogonal matrices is that 
+they preserve norms of vectors and the standard inner product. (You can 
+define orthogonal matrices as the ones with this property, in fact.)</p>
+	</li>
+	<li>
+		<p>The columns of <b>W</b> are linearly independent because the vectors are orthogonal, so <b>W</b> should clearly be invertible. Use <code>inv(W)</code> to compute the inverse of <b>W</b>, and then compare it to <b>W</b><sup>T</sup>. What do you observe?</p>
+	</li>
+</ol>
+</div>
+
+<p>Orthogonal matrices are incredibly important in geometry and physics.
+ One reason for this is that orthogonal 2×2 matrices with positive 
+determinant represent rigid motions of the plane about the origin; 
+similarly, 3×3 orthogonal matrices with positive determinant give rigid 
+motions of space about the origin. With negative determinants, you also 
+allow reflections through a line or a plane. If you like, try to see 
+geometrically why all distance-preserving linear transformations of the 
+plane that keep the origin fixed must be either reflections or rotations
+ (or both).</p>
+
+<h2>Orthogonal Projections</h2>
+
+<p>When we have two vectors pointing in different directions, we 
+frequently want to divide one of the vectors into two pieces: one piece 
+going in a direction parallel to the second vector, and one piece 
+perpendicular to that direction. This gives us a way of writing the 
+first vector in terms of the second one. We do this computation using 
+orthogonal projections.</p>
+
+<p>Hopefully, in the last section, you were able to see that the vectors <b>v</b> and <b>w</b> were not orthogonal. Suppose we want to find the orthogonal projection of <b>v</b> onto <b>w</b>—that is, the part of <b>v</b> traveling in the direction of <b>w</b>. Let's denote this vector by <b>v̄</b>. The projection formula says that</p>
+
+<p class="center"><b>v̄</b> = (⟨<b>v</b>, <b>w</b>⟩/⟨<b>w</b>, <b>w</b>⟩)<b>w</b></p>
+
+<p>(Note that if <b>w</b> is normalized to length 1, then you need not divide by ⟨<b>w</b>, <b>w</b>⟩, since that is equal to 1 already.)</p>
+
+<p>Here's a picture of what we're doing:</p>
+
+<img class="center" style="border: 0px solid ; width: 340px; height: 215px;" alt="" src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/projection.gif">
+ 
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>Find <b>v̄</b>, the orthogonal projection of <b>v</b> onto <b>w</b>. You can't enter <b>v̄</b> as a variable name in MATLAB, so call it <code>vbar</code> instead. Also compute <b>z</b> = <b>v</b> - <b>v̄</b>, the component of <b>v</b> orthogonal to <b>w</b>. Then write <b>v</b> as the sum of these two vectors.</p>
+	</li>
+	<li>
+		<p>Use MATLAB to check that <b>z</b> is orthogonal to <b>v̄</b>. (Keep
+ in mind that rounding errors in the computation might give you an 
+answer that looks a little different from what you might expect.)</p>
+	</li>
+</ol>
+</div>
+
+<p>We've now seen how to project vectors onto other vectors. The idea 
+behind projecting a vector onto a subspace instead is an easy extension 
+of this method: we find an orthogonal basis for the subspace, project 
+the vector onto each basis element, and then add up all the individual 
+projections to form the orthogonal projection on the subspace.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+
+<p>Use MATLAB to find the projection of the vector (3, 3, 3)<sup>T</sup> onto the subspace spanned by the vectors <b>x</b> and <b>y</b> (which we defined earlier in this lab).</p>
+</div>
+
+<p>The vectors <b>x</b> and <b>y</b> were already orthogonal, so in the 
+last exercise we didn't have to compute an orthogonal basis. But if our 
+basis vectors weren't orthogonal to each other, we'd have to modify them
+ to make them orthogonal. In class you may have already seen the <a href="https://en.wikipedia.org/wiki/Gram%E2%80%93Schmidt_process">Gram–Schmidt process</a>, which does exactly that.</p>
+
+<p>The MATLAB command that performs the Gram–Schmidt process is called <code>qr()</code>. Given a matrix <b>A</b>, it performs an algorithm called QR factorization, returning two matrices: an orthogonal matrix <b>Q</b> whose columns are obtained from the columns of <b>A</b> using Gram–Schmidt; and an upper triangular matrix <b>R</b> such that <b>A</b> = <b>QR</b>.</p>
+
+<div class="example">
+<span class="e-g"></span>
+
+<p>Let's try to find an orthonormal basis for the subspace spanned by the vectors <b>a</b> and <b>b</b> we defined earlier. We start by defining a new matrix <b>A</b> whose columns are <b>a</b> and <b>b</b>.</p>
+
+<pre><samp>&gt;&gt; </samp><code>A = [a b]</code>
+
+<samp>A =
+
+    1	2
+    1	0
+    0	3</samp></pre>
+
+<p>Next, we use the <code>qr()</code> command.</p>
+
+<pre><samp>&gt;&gt; </samp><code>[Q,R] = qr(A)</code>
+
+<samp>Q =
+
+    -0.7071     0.3015    -0.6396
+    -0.7071    -0.3015     0.6396
+     0          0.9045     0.4264
+
+R =
+
+    -1.4142     -1.4142
+     0           3.3166
+     0           0</samp></pre>
+     
+<p>You might notice that we only put two vectors (<b>a</b> and <b>b</b>) into <b>A</b>, and yet MATLAB gave us a matrix <b>Q</b> with three columns. In this case, the two orthonormal vectors we are looking for are the first two columns of <b>Q</b>. If we had supplied three vectors in <b>R</b><sup>3</sup> instead of just two, we'd use all three columns. Alternatively, we could enter the command <code>[Q,R] = qr(A,0)</code> to eliminate the extraneous columns. In any case, our orthonormal basis for the subspace spanned by <b>a</b> and <b>b</b> is</p>
+
+<img class="center" style="border: 0px solid ; width: 253px; height: 83px;" alt="" src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/basis.gif">
+</div>
+
+<p>Now it's your turn to do this.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/text.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>The set {(1, 2, 1)<sup>T</sup>, (2, 1, 2)<sup>T</sup>, (1, 1, 2)<sup>T</sup>} is a basis for <b>R</b><sup>3</sup>. As in the example above, turn it into an orthonormal basis. You should obtain an orthogonal matrix <b>Q</b> whose columns are the vectors obtained by performing Gram–Schmidt on this set.</p>
+	</li>
+	<li>
+		<p>Store the eigenvalues of <b>Q</b> in a vector <b>v</b> as follows:</p>
+		
+		<samp>&gt;&gt; </samp><code>v = eig(Q)</code>
+		
+		<p>Then enter the following code:</p>
+		
+		<samp>&gt;&gt; </samp><code>norm(v(2))</code>
+		
+		<p>This command tells MATLAB to find the absolute value of the second entry in the vector <b>v</b>, i.e., the absolute value of the second eigenvalue. Do the same for the third eigenvalue. What do you observe?</p>
+	</li>
+</ol>
+</div>
+
+<p>It is always the case that the eigenvalues of any orthogonal matrix 
+will have absolute value 1. Suppose that you're working with a 3×3 
+orthogonal matrix <b>T</b> that happens to have determinant 1. The 
+characteristic polynomial has degree three, and therefore it has a real 
+root. The other two roots will be some unit complex number (including 
+possibly 1 or -1) and its complex conjugate. The product of all three 
+roots is supposed to be the determinant, and the product of the two 
+complex roots is 1, so the real root must in fact be 1.</p>
+
+<p>This means any orthogonal matrix <b>T</b> with determinant 1 must have 1 as an eigenvalue. If <b>v</b> is an eigenvector corresponding to this eigenvalue, then for any real number <var>c</var>, <b>T</b>(<var>c</var><b>v</b>) = <var>c</var><b>Tv</b> = c<b>v</b>. So <b>T</b> fixes the entire axis on which <b>v</b> lies. And <b>T</b>
+ is an orthogonal matrix, so it represents some rigid motion of space. 
+Since it leaves one axis fixed, it must be a rotation around that axis! 
+We've just deduced a remarkable theorem:</p>
+
+<p><span class="e-n_style">Euler's Theorem:</span> A motion of a rigid body with one point fixed must be a rotation about some axis.</p>
+
+<p>If you think about it, this is pretty striking. Imaging moving your 
+phone around in your hands in such a way that the exact center of the 
+phone always stays in the same place. You might be doing all sorts of 
+crazy maneuvers with the phone as a whole, but as long as you keep that 
+one point in the same spot, in the end your entire motion amounted to 
+nothing more than a rotation around some axis.</p>
+
+<h2>Least Squares</h2>
+
+<p>Now we'll turn to some more practical concerns. Suppose we're trying 
+to study the relationship between temperature and pressure in a physical
+ experiment. We attach a temperature and pressure sensor to a metal 
+container. Starting at room temperature (75ºF), we slowly heat the air 
+inside our container to 195ºF, recording temperature and pressure 
+readings along the way. We get a total of five data points:</p>
+
+<table class="data" style="width:40%; margin-left:auto; margin-right:auto;">
+	<tbody><tr>
+		<th>Temperature (ºF)</th>	<th>Pressure (lb/sq. in.)</th>
+	</tr>
+	<tr>
+		<td>75</td>		<td>15</td>
+	</tr>
+	<tr>
+		<td>100</td>	<td>23</td>
+	</tr>
+	<tr>
+		<td>128</td>	<td>26</td>
+	</tr>
+	<tr>
+		<td>159</td>	<td>34</td>
+	</tr>
+	<tr>
+		<td>195</td>	<td>38</td>
+	</tr>
+</tbody></table>
+
+<p>Since we suspect the relationship here to be linear, we will be looking for a straight line with the equation <var>y = mx + b</var>, where <var>y</var> is the pressure, <var>x</var> is the temperature, <var>m</var> is the slope, and <var>b</var> is the <var>y</var>-intercept.
+ We would like this line to pass through the data points we collected 
+from the experiment. Plugging these data points into the equation for 
+the line, we obtain the following system of equations:</p>
+
+<p class="center">
+<var>b</var> + 75<var>m</var> = 15 <br>
+<var>b</var> + 100<var>m</var> = 23 <br>
+<var>b</var> + 128<var>m</var> = 26 <br>
+<var>b</var> + 159<var>m</var> = 34 <br>
+<var>b</var> + 195<var>m</var> = 38
+</p>
+
+We'll attempt to solve this system. First, let's rewrite it in matrix form:
+
+<img class="center" style="border: 0px solid ; width: 214px; height: 138px;" alt="" src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/system.gif">
+
+<p>Unfortunately, this system doesn't have a solution, even though the 
+underlying physical law really is a linear one. This is because it's 
+impossible to have perfect accuracy when recording data. Instead of 
+solving this system, we can instead try to find the closest linear 
+solution. That is, we want to find the best fit line: the line that 
+minimizes the sum of the squares of the distances from each data point 
+to the line.</p>
+
+<p>To simplify notation, let's assign names to the matrices and vectors of the above system.</p>
+
+<img class="center" style="border: 0px solid ; width: 336px; height: 140px;" alt="" src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/systemnames.gif">
+
+<p>We're trying to find a vector <b>c</b> that minimizes the distance ‖<b>Bc</b> - <b>d</b>‖. Of course, we can never hope for this to be zero because <b>Bc</b> = <b>d</b> has no solutions. However, the equation <b>Bc</b> = proj<sub><var>V</var></sub><b>d</b>, where <var>V</var> is the column space of <b>B</b>, <i>does</i> have a solution. That's because proj<sub><var>V</var></sub><b>d</b> lies in the column space of <b>B</b>, and the linear transformation <b>B</b> hits every vector in its column space. The solution to this equation turns out to minimize the quantity ‖<b>Bc</b> - <b>d</b>‖. In the following exercise, we will solve the equation <b>Bc</b> = proj<sub><var>V</var></sub><b>d</b> directly.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/text.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>Enter the matrix <b>B</b> and the vector <b>d</b> into MATLAB. To compute proj<sub><var>V</var></sub><b>d</b>, we must first find an orthonormal basis for <var>V</var>. For this, we use the <code>qr()</code> command:</p>
+		
+		<samp>&gt;&gt; </samp><code>[Q, R] = qr(B,0)</code>
+		
+		<p>The columns of <b>Q</b> form an orthonormal basis for <var>V</var>. Let's give them their own names:</p>
+		
+		<pre><samp>&gt;&gt; </samp><code>x = Q(:, 1)</code>
+<samp>&gt;&gt; </samp><code>y = Q(:, 2)</code></pre>
+		
+		<p>Now we're ready to compute proj<sub><var>V</var></sub><b>d</b>. To do this, we add up the projections of <b>d</b> onto each element in our orthonormal basis, like so:</p>
+		
+		<samp>&gt;&gt; </samp><code>v = dot(x,d)*x + dot(y,d)*y</code>
+		
+		<p>The resulting vector <b>v</b> here is proj<sub><var>V</var></sub><b>d</b>. Remember to include all your input and output for this procedure in your write-up.</p>
+	</li>
+	<li>
+		<p>Now solve the equation <b>Bc</b> = proj<sub><var>V</var></sub><b>d</b> = <b>v</b> by typing in the following:</p>
+		
+		<samp>&gt;&gt; </samp><code>c = B\v</code>
+		
+		<p>Check that your answer is correct by entering</p>
+		
+		<samp>&gt;&gt; </samp><code>B*c - v</code>
+		
+		<p>Make sure the answer is zero. (Keep in mind that MATLAB may return a very small number instead of zero due to rounding errors.)</p>
+	</li>
+	<li>
+		<p>Now let's compare the answer we just found to what MATLAB gives us when we run the built-in least squares algorithm named <code>lscov</code>. To use it, we must specify three parameters: the matrix <b>B</b>, the vector <b>d</b>, and a covariance matrix <b>X</b>, which we won't worry about in this course. Type in the following command:</p>
+		
+		<samp>&gt;&gt; </samp><code>cl = lscov(B, d, eye(5))</code>
+		
+		<p>How does your answer to this part compare to your previous answer?</p>
+	</li>
+</ol>
+</div>
+
+<p>To illustrate the effectiveness of the least squares method, we'll plot our data points along with the best-fit line.</p>
+
+<div class="exercise">
+<span class="e-x"></span>
+<img alt="Include plots and graphs." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/graph.png" class="align-right" width="24" height="24">
+<img alt="Include input and output." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/console.png" class="align-right" width="24" height="24">
+<img alt="Include full-sentence response." src="5%20%EF%B8%B1%20Orthogonality%20&amp;%20Least%20Squares_files/text.png" class="align-right" width="24" height="24">
+
+<ol type="a">
+	<li>
+		<p>What is the equation of the best-fit line? (Remember that the equation of the line is <var>y = mx + b</var>, and the vector <b>c</b> we just obtained is equal to (<var>b</var>, <var>m</var>)<sup>T</sup>.)</p>
+	</li>
+	<li>
+		<p>Use the equation of the line to calculate the pressure at the following temperatures: 35ºF, 170ºF, and 290ºF.</p>
+	</li>
+	<li>
+		<p>We can now plot the data points and our line to see visually if the
+ approximation is good or not. Enter the following sequence of commands:</p>
+		
+<pre><samp>&gt;&gt; </samp><code>x = B(:,2);</code>
+<code>y = d;</code>
+<code>t = 0:1:300;</code>
+<code>z = polyval([c(2);c(1)],t);;</code>
+<code>plot(x,y,'x',t,z)</code></pre>
+	</li>
+</ol>
+</div>
+
+<p>If you're curious, the command <code>polyval()</code> returns a polynomial of a specific degree with coefficients specified by a vector.</p>
+
+<!--<h2>Feedback</h2>
+
+<p>
+This tutorial was overhauled in Fall 2016. In order to continue improving this lab, we need some (required!) feedback from you, the student.
+</p>
+
+<div class="exercise">
+<span class="e-x">: Feedback</span>
+<img alt="Include full-sentence response."
+ src="img/text.png" width="24" height="24" class="align-right">
+<p>
+Please answer the following questions on a <b>separate page</b> at the end of your assignment.
+</p>
+<ul>
+	<li>How long did this assignment take you to complete?</li>
+	<li>Have you had a course besides Math 18 that used MATLAB? If yes, which course?</li>
+	<li>Did you encounter any errors or potential errors while working through this lab?</li>
+	<li>Were there any typos or unclear statements? Please tell us where.</li>
+	<li>Do you have anything else you'd like to say about the lab?</li>
+</ul>
+<p>
+Please be as specific as possible. If you have any suggestions to submit at a later time, you can also email the head MATLAB TA at <a href="mailto:matlabta@math.ucsd.edu">matlabta@math.ucsd.edu</a>.
+</p>
+</div>
+-->
+
+<h2>Conclusion</h2>
+
+<p>
+In this final lab, we've seen how orthogonality and the method of least 
+squares can be harnessed to help us analyze experiments and find the 
+best possible approximations for our data. These tools are essential to 
+the process of building workable mathematical models in all kinds of 
+applications.</p>
+
+<hr>
+<i id="mod">Last Modified: 8 January 2017</i>
+
+</div>
+
+
+</div>
+
+
+
+</body></html>
