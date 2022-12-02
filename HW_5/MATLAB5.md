@@ -248,3 +248,43 @@ ans =
 
 The number is so small that it can be seen as zero, due to the tiny amount of error 
 Matlab has, so therefore they are orthogonal
+
+<br/><br/>
+
+## Exercise 5.4
+
+``` Matlab
+>> x = [6; 1; -3];
+>> y = [1; 0; 2];
+>> v = [3 3 3]'
+
+v =
+
+     3
+     3
+     3
+
+>> projvx = (dot(v, x)/dot(x, x))*x
+
+projvx =
+
+    1.5652
+    0.2609
+   -0.7826
+
+>> projvy = (dot(v, y)/dot(y, y))*y
+
+projvy =
+
+    1.8000
+         0
+    3.6000
+
+>> vbar = projvx + projvy
+
+vbar =
+
+    3.3652
+    0.2609
+    2.8174
+```
