@@ -445,6 +445,7 @@ ans =
 
 Yes, the answer is zero, since $\times10^{-14}$ is very close to zero, so it can be 
 seen as a rounding error by Matlab
+<br></br>
 
 c.
 
@@ -458,3 +459,35 @@ cl =
 ```
 
 The answer is identical to $c$
+
+<br/><br/>
+
+## Exercise 5.7
+
+a.
+
+The equation is $y = 0.189 x + 2.3596$
+<br></br>
+
+b.
+
+| Temperature | Pressure |
+| ----------- | -------- |
+| 35 F        | 8.9746   |
+| 170 F       | 34.4896  |
+| 290 F       | 57.1696  |
+
+<br></br>
+c.
+
+```Matlab
+>> x = B(:,2);
+y = d;
+t = 0:1:300;
+z = polyval([c(2);c(1)],t);;
+plot(x,y,'x',t,z)
+```
+
+<img src="hw_5_7_c_graph.png"
+     alt="Projection picture"
+     style="text-align:center; width:500px; height:400px; margin-left: 50px" />
