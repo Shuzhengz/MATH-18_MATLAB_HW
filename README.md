@@ -14,4 +14,8 @@ All rights to the questions reserved to UC San Diego
 
 # Requirements
 
-You will need to have Matlab installed on your system in order to run the operations
+You will need to have MatLab installed on your system in order to run the operations
+
+The specific version used for these assignments is MatLab release 2022b
+
+Simulink and Simbolic Math Toolbox addons are required for symbolic operations
