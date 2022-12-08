@@ -10,5 +10,8 @@ not all answers are guranteed correct
 (in fact, I did get some of the questions wrong, but the instructor did not give any feedback so I have no idea what went wrong)
 (also because of the strike, the last assignment was not graded)
 
-
 All rights to the questions reserved to UC San Diego
+
+# Requirements
+
+You will need to have Matlab installed on your system in order to run the operations
