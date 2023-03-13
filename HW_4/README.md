@@ -123,7 +123,7 @@ ans =
    1.5000e-05
 ```
 
-Ding the determinant of $N^{100}$ by hand I got the value of 0, because the last row is all zeros. 
+Dong the determinant of $N^{100}$ by hand I got the value of 0, because the last row is all zeros. 
 But I still think $N^{100}$ is invertible, because the 0 at column 3 of row 3 is not 
 actually a zero, but instead a number so small that the calculator just sees it as a zero. 
 
