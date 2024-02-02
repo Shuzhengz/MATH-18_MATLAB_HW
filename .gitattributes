@@ -2,3 +2,6 @@
 *.css linguist-documentation
 *.html linguist-documentation
 *.htm linguist-documentation
+
+# Include Markdown in language stats
+*.md linguist-detectable
